@@ -2,12 +2,25 @@ destination: docs
 
 # url: 
 
+template:
+  bootstrap: 5
+  bslib:
+    preset: "bootstrap"
+    primary: "#00857c"
+    navbar-light-brand-color: "#fff"
+    navbar-light-brand-hover-color: "#fff"
+    navbar-light-color: "#fff"
+    navbar-light-hover-color: "#fff"
+    navbar-light-active-color: "#fff"
+    dropdown-link-hover-color: "#fff"
+    dropdown-link-hover-bg: "#00857c"
+
 footer:
   structure:
     left: [developed_by, built_with, legal]
     right: [blank]
   components:
-    legal: "<br>Copyright &copy; 2026 Merck & Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved."
+    legal: "<br>Copyright &copy; 2024 Merck & Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved."
     blank: "<span></span>"
 
 navbar:
@@ -23,8 +36,18 @@ navbar:
     - text: "Changelog"
       href: news/index.html
   right:
+    - text: "SDLC"
+      menu:
+      - text: "Specification"
+        href: articles/package_manual.pdf
+      - text: "Testing Plan"
+        href: articles/testing-plan.html
+      - text: "Testing Report"
+        href: articles/code-covr.html
+      - text: "Program Development and Validation Tracker"
+        href: articles/pdvt.html
     - text: "Source code"
-      href: https://github.com/MSDLLCPapers/oncoPoS
+      href: https://github.com/Merck/oncoPoS
 articles:
 - title: Introduction
   contents:
@@ -33,4 +56,6 @@ articles:
   contents:
   - code-covr
   - testing-plan
-
+- title: Program Development and Validation Tracker
+  contents:
+  - pdvt

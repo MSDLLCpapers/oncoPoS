@@ -5,7 +5,9 @@ data {
   real theta_hat_sd; // sampling error variance for theta_hat
   real tau_sd2; // half normal prior variance 
   real tau_sd3; // half normal prior variance 
-  real omega; // mixture weight
+  //real omega; // mixture weight
+  real<lower=0> omega_alpha;
+  real<lower=0> omega_beta;
   real delta_P; // mean for pessimistic scenario
   real sigma_P1; // stdev for optimistic scenario
   real sigma_P2; // stdev for pessimistic scenario
@@ -25,6 +27,8 @@ parameters {
   // phase III parameters 
   real theta_P2_raw;              // real phase 3 tmt effects
   real theta_P3_raw;              // real phase 3 tmt effects
+  
+  real<lower=0, upper=1> omega;
 }
 
 transformed parameters {
@@ -37,6 +41,8 @@ transformed parameters {
   
 model {
   // population level
+  //omega ~ beta(2, 2); // weakly informative prior
+  omega ~ beta(omega_alpha, omega_beta); // informative prior from step 1
   target += log_mix(omega, normal_lpdf(mu_P|delta_P,sigma_P1), normal_lpdf(mu_P|0,sigma_P2));
   
   // study level

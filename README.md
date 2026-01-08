@@ -6,16 +6,19 @@
 oncology study using a Bayesian Hierarchical model. The prior in this model is 
 based on the data observed in an earlier study, design features for the phase 3 
 study that is being assessed and the industry benchmark for success.
+The benchmark PoS is specified via a Beta distribution using its 
+**mean and variance**, which can be derived from historical success rates or 
+predictive models (e.g., random forest). 
+The framework supports both **single-arm and two-arm** early-phase designs and 
+allows for **indication-specific ORR–PFS regression** when surrogate endpoints
+are used.
 
 ## Installation
 
 You can install development version of `oncoPoS` from GitHub with:
 
 ```r
-if (!requireNamespace("remotes")) {
-  install.packages("remotes")
-}
-remotes::install_github("MSDLLCPapers/oncoPoS")
+remotes::install_github("Merck/oncoPoS")
 ```
 
 ## Example
@@ -29,32 +32,44 @@ for the an oncology phase 3 trial PoS calculation:
   - Two analyses using group sequential approach are planned;
   - The number of target events at each analysis is 370 and 468;
   - The approximate HR bound at each analysis is 0.7790 and 0.8204;
-  - The randomization ratio is 2:1.
+  - The randomization ratio is 1:1.
 
 - The above phase 3 trial is planned following promising results in an earlier
 phase 2 study, which reported PFS HR (95% CI) of 0.53 (0.31, 0.91).
 
-- The industry benchmark for success is 0.57 for this type of phase 3 trial.
+- In addition to PFS, objective response rate (ORR) data is available from a 
+  single-arm phase 2 trial, with 40 responders out of 100 patients and 
+  historical control response rate assumed to lie between 0.05 and 0.20.
+
+- The benchmark probability of success (`omega`) is modeled using a Beta prior 
+  with mean 0.3 and variance 0.03, reflecting prior belief about the historical 
+  success rate in similar studies.
 
 All the above information is synthesized in `oncoPoS::gen_pos()` using 
 Bayesian Hierarchical model to generate a PoS estimate:
 
 ```r
 gen_pos(
-  target_hr =  0.70,
-  J = 2,
-  nevents3 = c(370, 468),
-  hr_bound = c(0.7790, 0.8204),
-  est_obs_pfs = 0.53,
-  low_obs_pfs = 0.31,
-  upp_obs_pfs = 0.91,
-  omega = 0.57,
-  seed = 574,
-  ratio = 2,
-  use_pfs = TRUE,
-  nchains = 4,
-  niter = 1000
-) 
+   target_hr = 0.70,
+   J = 2,
+   nevents3 = c(370, 468),
+   hr_bound = c(0.7790, 0.8204),
+   thres = 0.01,
+   ratio = 1,
+   omega_mean = 0.3,
+   omega_var = 0.03,
+   est_obs_pfs = 0.53,
+   low_obs_pfs = 0.31,
+   upp_obs_pfs = 0.91,
+   use_pfs = TRUE,
+   n_trt2 = 100,
+   n_resp_trt2 = 40,
+   low_soc_rr = 0.05,
+   upp_soc_rr = 0.2,
+   use_orr = TRUE,
+   single_arm = TRUE,
+   seed = 222
+ )
 
 ```
 

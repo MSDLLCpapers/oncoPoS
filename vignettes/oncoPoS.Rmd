@@ -50,7 +50,7 @@ PoS estimation and therefore are not inputs in `oncoPoS` relevant functions.
 
 To proceed with the PoS estimation, an industry benchmark is required as well. 
 We'll assume that, without considering specific design features of this trial, 
-there is a 50% chance that such trial will be successful.
+there is a 50% chance that such trial will be succesful.
 
 ## No earlier study data
 
@@ -59,8 +59,7 @@ phase 3 through an objective response rate (ORR) or PFS, the PoS estimate at
 each analysis is calculated as following:
 
 
-
-``` r
+```r
 library(oncoPoS)
 
 gen_pos(
@@ -71,14 +70,11 @@ gen_pos(
   omega = 0.5,
   seed = 245
  ) 
-```
-
-```
-## # A tibble: 2 × 3
-##       J   pos pos_se
-##   <int> <dbl>  <dbl>
-## 1     1 0.414 0.0110
-## 2     2 0.492 0.0112
+#> # A tibble: 2 × 3
+#>       J   pos pos_se
+#>   <int> <dbl>  <dbl>
+#> 1     1 0.404 0.0155
+#> 2     2 0.475 0.0158
 ```
 
 ## Prior PFS data
@@ -91,8 +87,7 @@ thus design a phase 3 trial. This additional information is incorporated in
 the PoS estimates as follows:
 
 
-
-``` r
+```r
 gen_pos(
   target_hr = 0.7,
   J = 2,  
@@ -105,14 +100,11 @@ gen_pos(
   upp_obs_pfs = 0.91,
   seed = 245
  ) 
-```
-
-```
-## # A tibble: 2 × 3
-##       J   pos  pos_se
-##   <int> <dbl>   <dbl>
-## 1     1 0.73  0.00993
-## 2     2 0.812 0.00874
+#> # A tibble: 2 × 3
+#>       J   pos pos_se
+#>   <int> <dbl>  <dbl>
+#> 1     1 0.736 0.0139
+#> 2     2 0.802 0.0126
 ```
 
 ## Prior ORR data
@@ -126,8 +118,7 @@ In this case, when the ORR data is used, coefficients for the linear
 relationship between the log treatment effect on ORR and PFS must be specified:
 
 
-
-``` r
+```r
 gen_pos(
   target_hr = 0.7,
   J = 2,  
@@ -146,12 +137,9 @@ gen_pos(
   lm_sd = 5.1158,
   seed = 245
  ) 
-```
-
-```
-## # A tibble: 2 × 3
-##       J   pos pos_se
-##   <int> <dbl>  <dbl>
-## 1     1 0.572 0.0111
-## 2     2 0.656 0.0106
+#> # A tibble: 2 × 3
+#>       J   pos pos_se
+#>   <int> <dbl>  <dbl>
+#> 1     1 0.568 0.0157
+#> 2     2 0.662 0.0150
 ```

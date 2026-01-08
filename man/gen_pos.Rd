@@ -9,7 +9,8 @@ gen_pos(
   J,
   nevents3,
   hr_bound,
-  omega,
+  omega_mean = 0.52,
+  omega_var = 0.02,
   est_obs_pfs,
   low_obs_pfs,
   upp_obs_pfs,
@@ -19,11 +20,16 @@ gen_pos(
   n_ctrl2,
   n_resp_trt2,
   n_resp_ctrl2,
+  low_soc_rr,
+  upp_soc_rr,
+  ci_rr = 0.8,
   use_orr = FALSE,
+  single_arm = FALSE,
   use_pfs = FALSE,
   het_degree_p2 = "small",
   het_degree_p3 = "very small",
   ratio = 1,
+  indication = 6,
   m_0 = NA,
   m_1 = NA,
   nu_0 = NA,
@@ -48,8 +54,11 @@ alternative hypothesis)}
 \item{hr_bound}{numeric vector of hazard ratio bounds for analyses in phase
 3 study}
 
-\item{omega}{probability that a treatment effect comes from a enthusiastic
-prior component, i.e., initial benchmarking probability for the study success}
+\item{omega_mean}{Mean of the Beta prior for \code{omega}. \code{omega} is
+the probability that a treatment effect comes from a enthusiastic prior
+component, i.e., initial benchmarking probability for the study success}
+
+\item{omega_var}{Variance of the Beta prior for \code{omega}.}
 
 \item{est_obs_pfs}{estimated PFS hazard ratio based on prior/earlier study}
 
@@ -76,8 +85,19 @@ study}
 \item{n_resp_ctrl2}{number of responses in control arm from a prior/earlier
 study}
 
+\item{low_soc_rr}{Lower bound of historical control response rate for
+single-arm estimation.}
+
+\item{upp_soc_rr}{Upper bound of historical control response rate for
+single-arm estimation.}
+
+\item{ci_rr}{Confidence level for control response rate bounds, Default: 0.8.}
+
 \item{use_orr}{whether response data from a prior/earlier study should be
 used, Default: FALSE}
+
+\item{single_arm}{whether ORR data is from a single-arm trial, Default:
+FALSE.}
 
 \item{use_pfs}{whether PFS data from a prior/earlier study should be used,
 Default: FALSE}
@@ -92,23 +112,38 @@ parameter for a phase 3 study and must be one of "large",
 
 \item{ratio}{randomization ratio of experimental arm compared to control}
 
+\item{indication}{Integer from 1 to 6 for selecting indication-specific
+ORR–PFS regression parameters, as follows:
+1 = hematologic malignancies
+2 = gynecologic cancers
+3 = thoracic cancers
+4 = other solid tumors
+5 = breast cancer
+6 = any tumor type
+Default: 6}
+
 \item{m_0}{intercept for linear regression of log treatment effect of PFS on
-log treatment effect on response. A value is expected only when \code{use_orr = TRUE}
-and \code{use_pfs = TRUE}, Default: NA}
+log treatment effect on response. A value is expected only when
+\code{use_orr = TRUE} and \code{use_pfs = TRUE}. Auto-filled based on \code{indication}
+if not supplied.}
 
 \item{m_1}{slope for linear regression of log treatment effect of PFS on
-log treatment effect on response. A value is expected only when \code{use_orr = TRUE}
-and \code{use_pfs = TRUE}, Default: NA}
+log treatment effect on response. A value is expected only when
+\code{use_orr = TRUE} and \code{use_pfs = TRUE}. Auto-filled based on \code{indication}
+if not supplied.}
 
 \item{nu_0}{standard error of \code{m_0}. A value is expected only when
-\code{use_orr = TRUE} and \code{use_pfs = TRUE}, Default: NA}
+\code{use_orr = TRUE} and \code{use_pfs = TRUE}. Auto-filled based on \code{indication}
+if not supplied.}
 
 \item{nu_1}{standard error of \code{m_1}. A value is expected only when
-\code{use_orr = TRUE} and \code{use_pfs = TRUE}, Default: NA}
+\code{use_orr = TRUE} and \code{use_pfs = TRUE}. Auto-filled based on \code{indication}
+if not supplied.}
 
 \item{lm_sd}{linear regression residual variance of log treatment effect of
 PFS on log treatment effect on response. A value is expected only when
-\code{use_orr = TRUE} and \code{use_pfs = TRUE}, Default: NA}
+\code{use_orr = TRUE} and \code{use_pfs = TRUE}. Auto-filled based on \code{indication}
+if not supplied.}
 
 \item{niter}{number of iterations to be used in stan run, Default: 1000}
 
@@ -124,12 +159,19 @@ printed, Default: FALSE}
 \item{...}{params to pass to stan run}
 }
 \value{
-tibble of PoS estimates and the corresponding standard errors for
-each analysis. If \code{plots_out} is turned on, then the MCMC chains mixing and
+tibble of PoS estimates, the corresponding standard errors for
+each analysis, and the posterior mean and variance for omega.
+If \code{plots_out} is turned on, then the MCMC chains mixing and
 autocorrelation plots are provided as well.
 }
 \description{
-PoS estimation
+Computes the predicted probability of success (PoS) for a phase III clinical
+trial by integrating early-phase efficacy data—objective response rate (ORR)
+and/or progression-free survival (PFS)—with prior beliefs about study
+success. The prior distribution for the benchmark PoS is specified as a Beta
+distribution, parameterized by its mean and variance. Treatment effect
+estimation for ORR supports both two-arm and single-arm designs, with the
+latter incorporating historical control information.
 }
 \section{Specification}{
 
@@ -140,6 +182,7 @@ PoS estimation
   \item Transfer the hazard ratio bound to log-scale
   \item Extract simulated phase 3 trials treatment effects estimates and
   derive their standard errors
+  \item Calculates posterior mean and variance of \code{omega}.
   \item If `plots_out` is TRUE, generate plots for MCMC chains and 
   autocorrelation
   }
@@ -150,25 +193,35 @@ The contents of this section are shown in PDF user manual only.
 }
 
 \examples{
-# use PFS data from a prior study
+# Using both ORR and PFS from a prior single-arm study with a Beta prior on 
+# omega
 
-  gen_pos(
-    target_hr = 0.7, 
-    J = 2,  
-    nevents3 = c(370, 468), 
-    hr_bound = c(0.779, 0.8204), 
-    omega = 0.5, 
-    est_obs_pfs = 0.88, 
-    low_obs_pfs = 0.74, 
-    upp_obs_pfs = 1.05, 
-    use_pfs = TRUE, 
-    seed = 325,
-    ncores = 1,
-    nchains = 1) 
+gen_pos(
+  target_hr = 0.70,
+  J = 2,
+  nevents3 = c(370, 468),
+  hr_bound = c(0.7790, 0.8204),
+  thres = 0.01,
+  omega_mean = 0.3,
+  omega_var = 0.03,
+  est_obs_pfs = 0.73,
+  low_obs_pfs = 0.61,
+  upp_obs_pfs = 0.91,
+  use_pfs = TRUE,
+  n_trt2 = 100,
+  n_resp_trt2 = 40,
+  low_soc_rr = 0.05,
+  upp_soc_rr = 0.2,
+  use_orr = TRUE,
+  single_arm = TRUE,
+  seed = 222
+)
 }
 \seealso{
 \code{\link[tidybayes]{gather_draws}}
-\code{\link[dplyr]{mutate}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{summarise}}
+\code{\link[dplyr]{mutate}}, \code{\link[dplyr]{summarise}},
+\code{\link[dplyr]{group_by}}
 \code{\link[purrr]{map2}}, \code{\link[purrr]{reexports}}
-\code{\link[bayesplot]{MCMC-traces}}, \code{\link[bayesplot]{MCMC-diagnostics}}
+\code{\link[bayesplot]{MCMC-traces}},
+\code{\link[bayesplot]{MCMC-diagnostics}}
 }

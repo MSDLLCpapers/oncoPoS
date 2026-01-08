@@ -7,7 +7,9 @@ data {
   // hyperparameters:
   real tau_sd2; // half normal prior variance 
   real tau_sd3; // half normal prior variance 
-  real omega; // mixture weight
+  //real omega; // mixture weight
+  real<lower=0> omega_alpha;
+  real<lower=0> omega_beta;
   real delta_P; // mean for pessimistic scenario
   real sigma_P1; // stdev for optimistic scenario
   real sigma_P2; // stdev for pessimistic scenario
@@ -38,6 +40,8 @@ parameters {
   // phase III parameters 
   real theta_P2_raw;              // real phase 3 tmt effects
   real theta_P3_raw;              // real phase 3 tmt effects
+
+  real<lower=0, upper=1> omega;
 }
 
 transformed parameters {
@@ -47,12 +51,14 @@ transformed parameters {
   real beta_1;
   real orr_P;
   
+  //orr_P = mu_P + tau_P2 * orr_P_raw;
   theta_P2 = mu_P + tau_P2*theta_P2_raw;
   theta_P3 = mu_P + tau_P3*theta_P3_raw;
 
   beta_0 = m_0 + nu_0*beta_0_raw;
   beta_1 = m_1 + nu_1*beta_1_raw;
   
+  //theta_P2 = beta_0 + beta_1*orr_P + wls_sd*theta_P2_raw; //orr_P as the independent variable
   orr_P = beta_0 + beta_1*theta_P2 + wls_sd*orr_P_raw;
 }
 
@@ -60,6 +66,8 @@ model {
   // stan will try to find posterior of them here
   // linear relationship
   // population level
+  //omega ~ beta(2, 2); // weakly informative prior
+  omega ~ beta(omega_alpha, omega_beta); // informative prior from step 1
   target += log_mix(omega, normal_lpdf(mu_P|delta_P,sigma_P1), normal_lpdf(mu_P|0,sigma_P2));
   
   // regression parameter;
