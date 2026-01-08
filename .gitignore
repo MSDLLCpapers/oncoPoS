@@ -13,3 +13,4 @@ inst/library/
 library
 src/stan/*.rds
 docs/
+.DS_Store
