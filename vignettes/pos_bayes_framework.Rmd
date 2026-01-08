@@ -1,0 +1,191 @@
+---
+title: "PoS Bayesian Framework for Pivotal Oncology Trials"
+output:
+  rmarkdown::html_vignette
+bibliography: "oncoPoS.bib"
+resource_files:
+   - package_manual.pdf
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{PoS Bayesian Framework for Pivotal Oncology Trials}
+---
+
+```{r, echo = FALSE, message = FALSE, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+```{r, include=FALSE}
+manual <-devtools::build_manual(path = ".")
+manual <- basename(grep("--output=", manual$command, value = TRUE))
+file.rename(from = manual, to = "package_manual.pdf")
+```
+
+
+# Introduction
+
+Here we describe the Bayesian framework that is used to estimate a phase 3 
+efficacy probability of success (PoS) based on work by @hampson2022improving. 
+The framework consists of study and population level models that are described 
+in the following sections. 
+
+Let $P$ be a progression-free survival (PFS), and we assume that the 
+log hazard ratio (HR) of PFS for a phase III study is $\theta_{P3}$. 
+The subscript 3 denotes the phase of the study (i.e., phase III). In addition, 
+we assume that data on either the same endpoint $P$ or a different endpoint $D$ 
+is observed in an earlier phase I/II or phase II study which preceded a pivotal 
+trial ($\theta_{P2}$ or $\theta_{D2}$ respectively). 
+
+# General study level model \label{sec:gen_study_level}
+
+The study level model for an observed logHR of PFS in the earlier study 
+(phase I/II, phase II), $\hat{\theta}_{P2}$, is assumed to have the following 
+form:
+
+\begin{align}
+\hat{\theta}_{P2} \sim Normal(\theta_{P2}, \mathcal{I}^{-1}_{P2}) \label{eq:ph2_est},
+\end{align}
+
+where $\theta_{P2}$ represents a mean treatment effect on $P$ in the earlier 
+study and $\mathcal{I}_{P2}$ is the Fisher information for $\theta_{P2}$. 
+Using Bayesian framework, the prior for $\theta_{P2}$ is:
+$$\theta_{P2} \sim Normal (\mu_P, \tau_{P2}^2),$$
+where $\mu_P$ is a population level parameter for the treatment effect on $P$.
+$\tau_{P2}$ characterizes the degree of heterogeneity in the treatment effect on
+$P$ across different earlier studies, which is assumed to follow a half-Normal 
+distribution: $\tau_{P2} \sim HN(z^2_2)$.
+
+
+Similar to the above, a phase III study level model for treatment effect on 
+endpoint $P$, $\theta_{P3}$ has the following distribution: 
+
+\begin{align}
+\theta_{P3} \sim Normal (\mu_P, \tau_{P3}^2)\label{eq:p3}
+\end{align}
+
+The population level parameter $\mu_P$ is shared across the phases of the 
+clinical development. $\tau_{P3}$ is assumed to follow a half-Normal 
+distribution: $\tau_{P3} \sim HN(z^2_3)$. The choice of $\tau_{P2},\ \tau_{P3}$ 
+will follow Supplementary Materials E in @hampson2022improving.
+
+
+# Population level model \label{sec:gen_pop_level}
+
+The population level treatment effect, $\mu_P$, is assumed to come from a 
+mixture prior:
+
+\begin{align}
+\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2) ,
+\end{align}
+
+with the following components:
+
+- $w$ is a probability that $\mu_P$ comes from the enthusiastic prior component.
+The value of $w$ is determined by the industry benchmark.
+
+- $Normal(\delta_P, \sigma^2_{P1})$ is the enthusiastic component, i.e., a 
+distribution which is centered at the target treatment effect $\delta_P$ (i.e.,
+alternative hypothesis). $\sigma^2_{P1}$ is set as a solution to: 
+$P(\mu_P \ge 0 | \omega = 1)=\gamma$, which is consistent with the 
+interpretation of the enthusiastic ("alternative") component, 
+$\Leftrightarrow \sigma_{P1} = \frac{\delta_P}{\Phi^{-1}(\gamma)}$.
+
+- $Normal(0, \sigma^2_{P2})$ is the skeptical component, i.e., a distribution 
+which is centered at the null hypothesis. $\sigma^2_{P2}$ is set as a solution 
+to: $P(\mu_P \le \delta_P | \omega = 0)=\gamma$, which is consistent with the 
+interpretation of the skeptical ("null") component, 
+$\Leftrightarrow \sigma_{P2} = \frac{\delta_P}{\Phi^{-1}(\gamma)}$.
+
+When $P$ denotes the logHR of PFS, $\gamma$ is the probability that the 
+population level treatment effect is equal to or worse than the null (i.e.,
+logHR is $\ge 0$) when the benchmarking data indicate an optimistic expectation 
+of the treatment effect; or the probability that the population level treatment 
+effect is equal to or better than the target effect in phase III (i.e., logHR 
+is $\le \delta_P$) when the benchmarking data indicate we should have 
+pessimistic expectation of the treatment effect. $\gamma$ should be set to a 
+small number so that the probability of either lack treatment effect under the 
+enthusiastic prior or substaintial treatment effect under the pessimistic prior 
+is small. 
+
+# Phase III efficacy PoS prediction \label{sec:pos}
+
+After fitting the models that are outlined above, we can generate a phase III 
+efficacy PoS prediction based on the distribution of $\theta_{P3}$.
+
+Let $J$ denotes the number of analyses considered in a group sequential design 
+for a future phase III study. For instance, if $J = 2$, this means that a study 
+has one interim analysis (IA) and one final analysis (FA). The distribution of 
+the observed log HR for endpoint $P$ at the $j$-th analysis, 
+$\hat{\theta}_{P3j}, j = 1, ..., J$ is as follows: 
+
+\begin{align}
+\hat{\boldsymbol{\theta}}_{P3} \sim Normal ({\theta}_{P3}\mathbf{1}_{J}, \mathbf{\Sigma}_{J \times J})\label{eq:thetahat_samp},
+\end{align}
+
+where $\theta_{P3}$ is the underlying true log hazard ratio for all $J$ 
+analyses. $\mathbf{\Sigma}$ is the covariance matrix that encodes the Fisher's
+information for $\hat{\theta}_{P3j}$: 
+
+\begin{align}
+\mathbf{\Sigma}_{ij} = \frac{\sigma_{unit}^2}{n_j}, ~~ \text{for all } i \leq j\label{eq:sigma},
+\end{align}
+
+with $n_j$ being the target number of events at the $j$-th analysis and 
+$\sigma_{unit}^2 = \frac{1}{p_0(1-p_0)}$ where $p_0$ is the planned proportion 
+of patients in the control group. 
+
+The predicted treatment effect $\hat{\boldsymbol{\theta}}_{P3}^{(l)}$ is 
+generated $L$ times ($l = 1, \dots, L$) based on the Bayesian hierarchical model
+and the success at the $j$-th analysis is determined by a Frequentest efficacy 
+boundary, $z_{P3j}$. Thus, the probability of stopping a phase III trial for 
+efficacy at the first IA is estimated as: 
+$$
+\hat{PoS}_{31} = \frac{1}{L} \sum_{l=1}^L I(\hat{\theta}_{P31}^{(l)} < z_{P31}),
+$$
+and the probability of stopping a phase III trial for efficacy at the $j^{th}$ 
+analysis is estimated as: 
+
+$$
+\hat{PoS}_{3j} = \frac{1}{L} \sum_{l=1}^L I(\hat{\theta}_{P3j}^{(l)} < z_{P3j}, \hat{\theta}_{P3i}^{(l)} \geq z_{P3i}, i = 1, \dots, j-1).
+$$
+Finally, the overall PoS is: $\hat{PoS}_{3} = \sum_{j=1}^J \hat{PoS}_{3j}$.
+
+
+# Study level model when phase III primary endpoint is not available from earlier study(ies) \label{sec:ph3_ph2_diff}
+
+When an early study didn't have a reliable PFS estimate, and only ORR is 
+available from a randomized controlled phase II study, it can be used for PoS 
+estimation instead.
+Let $\theta_{ORR,2}$ represents a log odds ratio (OR) of the treatment effect on
+ORR, the observed treatment effect, $\hat{\theta}_{ORR, 2}$, has the following 
+distribution: 
+\begin{align}
+\hat{\theta}_{ORR, 2} \sim Normal(\theta_{ORR, 2}, \mathcal{I}_{ORR, 2}^{-1}),
+\end{align}
+where $\mathcal{I}_{ORR, 2}$ is the Fisher information associated with 
+$\hat{\theta}_{ORR, 2}$. Further, let $\theta_{PFS, 2}$ be the treatment effect 
+for PFS in Phase II. Motivated by the results in @blumenthal2015overall, we 
+assume the following linear model between the PFS and ORR treatment effects: 
+\begin{align}
+  \theta_{ORR,2} \sim N(\beta_0 + \beta_1 \theta_{PFS,2}, \frac{\sigma_{WLS}^2}{N_{patients}}), \label{eq:ph23_pfs_orr_rel}
+\end{align}
+where $N_{patients}$ is the number of patients in a given trial and the 
+regression parameters are assigned the following priors:
+\begin{align*}
+\beta_0 \sim {Normal}(m_0, \nu_0) \\
+\beta_1 \sim {Normal}(m_1, \nu_1). 
+\end{align*}
+The values of $m_0, m_1$, $\nu_0, \nu_1$ and $\sigma_{WLS}^2$ are determined 
+from historical data, which is provided in the meta-analysis in 
+@blumenthal2015overall. Specifically, $(m_0, m_1)$ are point estimates for the 
+intercept and slope from a weighted liner simple (WLS) linear regression model 
+of log(HR PFS) on log(OR ORR), while $(\nu_0, \nu_1)$ are their respective SEs,
+$\sigma_{WLS}^2$ is estimated based on WLS regression residual variance.
+
+Based on the approximated correlation between $\theta_{ORR, 2}$ and 
+$\theta_{PFS, 2}$, a distribution for $\theta_{PFS, 2}$ can be obtained and, 
+therefore, a predicated efficacy PoS can be estimated as using models that are 
+outlined above. 

@@ -1,0 +1,37 @@
+Package: oncoPoS
+Type: Package
+Title: Probability of Success (PoS) Calculation for Oncology Pivotal Studies
+Version: 0.1.0
+Authors@R: c(
+    person("Yulia", "Sidi", email = "yulia.sidi@msd.com", role = c("aut", "cre")),
+    person("Xiang", "Peng", email = "xiang.peng@msd.com", role = c("aut")),
+    person("Alex", "Ziyu Jiang", email = "jiang14@uw.edu", role = c("aut")),
+    person("BARDS, MSD", role = c("cph")) )
+Description: Performs Bayesian PoS calculations for phase 3 oncology studies.
+Depends: R (>= 3.6.0)
+License: file LICENSE
+URL: https://github.com/MSDLLCPapers/onsoPoS
+Encoding: UTF-8
+LazyData: true
+Imports:
+    bayesplot,
+    dplyr,
+    pracma,
+    purrr,
+    rstan,
+    stats,
+    tidybayes,
+    utils
+Suggests:
+    covr,
+    devtools,
+    kableExtra,
+    knitr,
+    readxl,
+    rmarkdown,
+    rprojroot,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
