@@ -1,0 +1,11 @@
+pandoc: 3.1.11
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  oncoPoS: oncoPoS.html
+  pos_bayes_framework: pos_bayes_framework.html
+  testing-plan: testing-plan.html
+last_built: 2026-01-09T01:11Z
+urls:
+  reference: msdllcpapers.github.io/oncoPoS/reference
+  article: msdllcpapers.github.io/oncoPoS/articles

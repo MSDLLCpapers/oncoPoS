@@ -1,0 +1,141 @@
+# Introduction to oncoPoS
+
+## Overview
+
+`oncoPoS` performs Probability of Success (PoS) calculations for a phase
+3 oncology study using a Bayesian Hierarchical model. The prior in this
+model is based on the data observed in an earlier study, design features
+for the phase 3 study that is being assessed and the industry benchmark
+for success.
+
+The Bayesian framework used in `oncoPoS` relies on the work by (Hampson
+et al. 2022). See [PoS Bayesian
+Framework](msdllcpapers.github.io/oncoPoS/articles/pos_bayes_framework.md)
+vignette for details.
+
+The main functions of the `oncoPoS` are `run_stan` and `gen_pos`, which
+generate the PoS estimate and its standard error (SE) at each planned
+analysis by running `rstan`. Note that the SE is
+
+The PoS estimate could be generated without considering an observed
+treatment effect in an earlier study,
+
+## PoS estimate example
+
+Let’s assume that we designed a phase 3 randomized oncology trial in a
+certain disease setting with progression-free survival (PFS) as a
+primary endpoint. The design features of this study are as follows:
+
+- Target hazard ratio (HR): 0.70;
+- Group sequential design with two analysis;
+- Target number of events at each analysis: 370, 468;
+- Approximate HR bound at each analysis: 0.779, 0.8204.
+
+While the overall alpha level of 2.5% and power 95.5% could be seen as
+design features in general, these are not considered as direct design
+features for the PoS estimation and therefore are not inputs in
+`oncoPoS` relevant functions.
+
+To proceed with the PoS estimation, an industry benchmark is required as
+well. We’ll assume that, without considering specific design features of
+this trial, there is a 50% chance that such trial will be successful.
+
+### No earlier study data
+
+If there is no specific earlier study that could be linked directly to
+this phase 3 through an objective response rate (ORR) or PFS, the PoS
+estimate at each analysis is calculated as following:
+
+``` r
+library(oncoPoS)
+
+gen_pos(
+  target_hr = 0.7,
+  J = 2,  
+  nevents3 = c(370, 468), 
+  hr_bound = c(0.779, 0.8204),
+  omega = 0.5,
+  seed = 245
+ ) 
+```
+
+    ## # A tibble: 2 × 3
+    ##       J   pos pos_se
+    ##   <int> <dbl>  <dbl>
+    ## 1     1 0.414 0.0110
+    ## 2     2 0.492 0.0112
+
+### Prior PFS data
+
+Let’s change the above scenario and assume that there was a randomized
+phase 2 trial with observed PFS hazard ratio (HR) of 0.53 and a 95%
+confidence interval (CI) of (0.31, 0.91). This phase 2 trial led to the
+decision to continue the clinical development of the compound in the
+specific disease setting and thus design a phase 3 trial. This
+additional information is incorporated in the PoS estimates as follows:
+
+``` r
+gen_pos(
+  target_hr = 0.7,
+  J = 2,  
+  nevents3 = c(370, 468), 
+  hr_bound = c(0.779, 0.8204),
+  omega = 0.5, 
+  use_pfs = TRUE,
+  est_obs_pfs = 0.53, 
+  low_obs_pfs = 0.31, 
+  upp_obs_pfs = 0.91,
+  seed = 245
+ ) 
+```
+
+    ## # A tibble: 2 × 3
+    ##       J   pos  pos_se
+    ##   <int> <dbl>   <dbl>
+    ## 1     1 0.73  0.00993
+    ## 2     2 0.812 0.00874
+
+### Prior ORR data
+
+If an earlier study didn’t have a reliable PFS estimate and only ORR was
+available, it can be used for PoS estimation as well. We will assume
+that, based on the earlier study 33 out of 60 and 18 out of 63
+participants in the experimental and control arms had responses
+respectively.
+
+In this case, when the ORR data is used, coefficients for the linear
+relationship between the log treatment effect on ORR and PFS must be
+specified:
+
+``` r
+gen_pos(
+  target_hr = 0.7,
+  J = 2,  
+  nevents3 = c(370, 468), 
+  hr_bound = c(0.779, 0.8204),
+  omega = 0.5,
+  use_orr = TRUE,
+  n_resp_trt2 = 33,
+  n_trt2 = 60,
+  n_resp_ctrl2 = 18, 
+  n_ctrl2 = 63,
+  m_0 = -0.20,
+  m_1 = 2.2,
+  nu_0 = 0.0541,
+  nu_1 = 0.2145,
+  lm_sd = 5.1158,
+  seed = 245
+ ) 
+```
+
+    ## # A tibble: 2 × 3
+    ##       J   pos pos_se
+    ##   <int> <dbl>  <dbl>
+    ## 1     1 0.572 0.0111
+    ## 2     2 0.656 0.0106
+
+Hampson, Lisa V, Björn Bornkamp, Björn Holzhauer, Joseph Kahn, Markus R
+Lange, Wen-Lin Luo, Giovanni Della Cioppa, Kelvin Stott, and Steffen
+Ballerstedt. 2022. “Improving the Assessment of the Probability of
+Success in Late Stage Drug Development.” *Pharmaceutical Statistics* 21
+(2): 439–59.
