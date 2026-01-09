@@ -1,6 +1,9 @@
 destination: docs
 
-# url: 
+url: msdllcpapers.github.io/oncoPoS/
+
+template:
+  bootstrap: 5
 
 footer:
   structure:
@@ -29,8 +32,7 @@ articles:
 - title: Introduction
   contents:
   - pos_bayes_framework
-- title: Coverage and Testing
+- title: Testing
   contents:
-  - code-covr
   - testing-plan
 

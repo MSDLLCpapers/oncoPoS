@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval = FALSE}
 manual <-devtools::build_manual(path = ".")
 manual <- basename(grep("--output=", manual$command, value = TRUE))
 file.rename(from = manual, to = "package_manual.pdf")
