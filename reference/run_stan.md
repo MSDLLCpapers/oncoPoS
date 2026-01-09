@@ -213,8 +213,8 @@ The contents of this section are shown in PDF user manual only.
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 5e-06 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
+#> Chain 1: Gradient evaluation took 7e-06 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -232,8 +232,8 @@ The contents of this section are shown in PDF user manual only.
 #> Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
 #> Chain 1: 
 #> Chain 1:  Elapsed Time: 0.017 seconds (Warm-up)
-#> Chain 1:                0.008 seconds (Sampling)
-#> Chain 1:                0.025 seconds (Total)
+#> Chain 1:                0.009 seconds (Sampling)
+#> Chain 1:                0.026 seconds (Total)
 #> Chain 1: 
 #> $fit_rstan
 #> Inference for Stan model: anon_model.
@@ -254,7 +254,7 @@ The contents of this section are shown in PDF user manual only.
 #> vec_ones[2]      1.00     NaN 0.00   1.00  1.00  1.00  1.00  1.00   NaN  NaN
 #> lp__            -8.88    0.11 1.60 -12.56 -9.72 -8.66 -7.61 -6.65   224    1
 #> 
-#> Samples were drawn using NUTS(diag_e) at Fri Jan  9 01:11:48 2026.
+#> Samples were drawn using NUTS(diag_e) at Fri Jan  9 01:19:53 2026.
 #> For each parameter, n_eff is a crude measure of effective sample size,
 #> and Rhat is the potential scale reduction factor on split chains (at 
 #> convergence, Rhat=1).
