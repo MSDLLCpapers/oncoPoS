@@ -10,7 +10,7 @@ Authors@R: c(
 Description: Performs Bayesian PoS calculations for phase 3 oncology studies.
 Depends: R (>= 3.6.0)
 License: file LICENSE
-URL: https://github.com/MSDLLCPapers/onsoPoS
+URL: https://github.com/MSDLLCPapers/onsoPoS, https://msdllcpapers.github.io/oncoPoS/
 Encoding: UTF-8
 LazyData: true
 Imports:
