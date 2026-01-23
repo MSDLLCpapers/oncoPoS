@@ -49,7 +49,10 @@ average ORR–PFS relationship across all indication groups.
 You can install development version of `oncoPoS` from GitHub with:
 
 ```r
-remotes::install_github("Merck/oncoPoS")
+if (!requireNamespace("remotes")) {
+  install.packages("remotes")
+}
+remotes::install_github("MSDLLCPapers/oncoPoS", ref = "develop")
 ```
 
 ## Example
