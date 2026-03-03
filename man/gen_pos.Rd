@@ -56,9 +56,10 @@ alternative hypothesis)}
 
 \item{omega_mean}{Mean of the Beta prior for \code{omega}. \code{omega} is
 the probability that a treatment effect comes from a enthusiastic prior
-component, i.e., initial benchmarking probability for the study success}
+component, i.e., initial benchmarking probability for the study success.
+Default: 0.52.}
 
-\item{omega_var}{Variance of the Beta prior for \code{omega}.}
+\item{omega_var}{Variance of the Beta prior for \code{omega}. Default: 0.02.}
 
 \item{est_obs_pfs}{estimated PFS hazard ratio based on prior/earlier study}
 
