@@ -280,3 +280,70 @@ Includes breast cancer.
 > indication groups will be used.
 
 
+## Prior ORR data {#sec:orr_data}
+
+The method for computing the observed log-odds ratio
+$\hat\theta^{\text{ORR}}$ and its standard error differs depending on whether
+the earlier study was a two-arm or single-arm trial.
+
+### Two-arm setting
+
+In the two-arm setting, $\hat\theta^{\text{ORR}}$ and its standard error are
+estimated directly from the observed response counts in each arm using
+frequentist estimation:
+
+$$
+\hat\theta^{\text{ORR}} = \log\!\left(\frac{x_{\text{SOC}}}{n_{\text{SOC}} - x_{\text{SOC}}}\right) - \log\!\left(\frac{x_{\text{trt}}}{n_{\text{trt}} - x_{\text{trt}}}\right)
+$$
+
+$$
+SE\!\left(\hat\theta^{\text{ORR}}\right) = \sqrt{\frac{1}{x_{\text{trt}}} + \frac{1}{n_{\text{trt}} - x_{\text{trt}}} + \frac{1}{x_{\text{SOC}}} + \frac{1}{n_{\text{SOC}} - x_{\text{SOC}}}}
+$$
+
+where $x_{\text{SOC}}$, $x_{\text{trt}}$ are the number of responders and
+$n_{\text{SOC}}$, $n_{\text{trt}}$ are the total number of patients in the SOC
+and treatment groups, respectively.
+
+### Single-arm setting
+
+When only single-arm data are available (i.e., no concurrent control
+arm), the observed ORR treatment effect cannot be computed directly
+from two-arm counts. Instead, following Weber et al. (2021), uncertainty
+in the control ORR is incorporated by placing a distribution over the
+Standard of Care (SOC) response rate, $p_{\text{SOC}}$, using
+user-specified lower and upper bounds.
+
+Let `low_soc_rr` and `upp_soc_rr` denote the lower and upper bounds for
+the control ORR. The corresponding logit-scale bounds are:
+
+$$
+\texttt{logit_low} = \log\!\left(\frac{\texttt{low_soc_rr}}{1 - \texttt{low_soc_rr}}\right), \qquad
+\texttt{logit_upp} = \log\!\left(\frac{\texttt{upp_soc_rr}}{1 - \texttt{upp_soc_rr}}\right)
+$$
+
+Rather than fixing $p_{\text{SOC}}$ to a point estimate, a normal
+distribution is placed on the logit scale:
+
+$$
+\text{logit}(p_{\text{SOC}}) \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+\;\Rightarrow\; p_{\text{SOC}} = \frac{e^x}{1 + e^x}, \quad x \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+$$
+
+where the mean and standard deviation are derived from the specified
+bounds:
+
+$$
+\mu_{\text{SOC}} = \frac{\texttt{logit_low} + \texttt{logit_upp}}{2}
+$$
+
+$$
+\sigma_{\text{SOC}} = \frac{\texttt{logit_upp} - \texttt{logit_low}}{2\cdot\Phi^{-1}\!\left(1 - \dfrac{1 - \texttt{ci_rr}}{2}\right)}
+$$
+
+$\Phi^{-1}(\cdot)$ denotes the quantile function of the standard normal
+distribution. `ci_rr` is the user-specified confidence level for the SOC
+response bounds (default = 95%). Lower values may be used for more
+conservative assumptions or when the SOC data are uncertain. In the single-arm setting,
+$x_{\text{SOC}}$ and $n_{\text{SOC}}$ entering the expressions above are drawn
+from the distribution over $p_{\text{SOC}}$ rather than observed directly.
+
