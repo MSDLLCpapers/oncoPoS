@@ -164,9 +164,39 @@ gen_pos(
 ```
 
 
+### Single-arm setting
 
+When no concurrent control arm is available in the earlier study, the SOC
+response rate $p_{\text{SOC}}$ cannot be observed directly. Instead, a
+distribution is placed over $p_{\text{SOC}}$ using user-specified lower
+and upper bounds on the control ORR:
 
+- `low_soc_rr`: lower bound for the control ORR
+- `upp_soc_rr`: upper bound for the control ORR
 
-
-
+In this setting, `n_resp_ctrl2` and `n_ctrl2` are replaced by `low_soc_rr`
+and `upp_soc_rr`. For example, assuming the SOC ORR is bounded between 5%
+and 20%:
+```r
+gen_pos(
+  target_hr = 0.7,
+  J = 2,
+  nevents3 = c(370, 468),
+  hr_bound = c(0.779, 0.8204),
+  omega_mean = 0.5,
+  use_orr = TRUE,
+  n_resp_trt2 = 33,
+  n_trt2 = 60,
+  single_arm = TRUE,
+  low_soc_rr = 0.05,
+  upp_soc_rr = 0.20,
+  indication = 5,
+  seed = 245
+)
+#> # A tibble: 2 × 5
+#>       J   pos  pos_se omega_mean omega_var
+#>   <int> <dbl>   <dbl>      <dbl>     <dbl>
+#> 1     1 0.871 0.00750      0.531    0.0197
+#> 2     2 0.922 0.00601      0.531    0.0197
+```
 
