@@ -194,3 +194,75 @@ Based on the approximated correlation between $\theta_{ORR, 2}$ and
 $\theta_{PFS, 2}$, a distribution for $\theta_{PFS, 2}$ can be obtained and, 
 therefore, a predicated efficacy PoS can be estimated as using models that are 
 outlined above. 
+
+## Indication-specific surrogate-primary endpoint relationships (e.g., ORR-> PFS) \label{sec:indication_specific}
+
+When early endpoint objective response rate (ORR) is used to predict 
+phase III progression-free survival (PFS), the strength and direction 
+of the association may vary substantially across cancer types. 
+To account for this heterogeneity, we group cancer indications into five categories, 
+each associated with a distinct set of ORR–PFS regression parameters derived from 
+prior Bayesian hierarchical modeling.
+
+Trial indexed by: \(j=1,\dots,J\). Indication indexed by: \(k=z_j \in \{1,\dots,K\}\).
+$\theta^P_j$: treatment effect on endpoint $P$ at trial $j$. $\sigma^P_j$: standard error of treatment effect on endpoint $P$ at trial $j$. 
+
+\begin{itemize}
+  \item \textbf{Level 1 observed trial-level model:}\\
+  Each trial reports an observed log-odds ratio for ORR, $\hat\theta^{\text{ORR}}_j$, 
+  and an observed log-hazard ratio for PFS, $\hat\theta^{\text{PFS}}_j$, and we model them as:
+  \[
+  \hat\theta^{\text{ORR}}_j \sim \mathcal{N}\bigl(\theta^{\text{ORR}}_j,   \ (\sigma^{\text{ORR}}_j)^2\bigr)
+  \]
+  \[
+  \hat\theta^{\text{PFS}}_j \sim \mathcal{N}\bigl(\theta^{\text{PFS}}_j,   \ (\sigma^{\text{PFS}}_j)^2\bigr)
+  \]
+  Conditional on the (latent) true PFS effect, the true ORR effect follows an indication-specific regression:
+  \[
+    \theta^{\text{ORR}}_j
+      \;\sim\;
+      \mathcal{N}\!\Bigl(\alpha_{z_j} + \beta_{z_j}\,\theta^{\text{PFS}}_j,\;
+      \sigma_{\text{WLS}}^{2}/N_{\text{patients},j}\Bigr).
+  \]
+
+  \item \textbf{Level 2 indication-specific regression parameters:}\\
+  Share information across indications by hierarchical modeling. Each pair is learned adaptively across indications.
+  \[
+  \alpha_k \sim \mathcal{N}(a_0,\ s_0^2), \quad
+  \beta_k \sim \mathcal{N}(b_0,\ s_1^2), \quad
+  k = 1,\dots,5
+  \]
+  \item \textbf{Level 3 population level (hyperpriors):}
+\[
+  a_0 \sim \mathcal{N}(0, 5^2), \quad
+  b_0 \sim \mathcal{N}(2, 5^2), \quad
+  s_0 \sim \mathcal{N}(0, 1^2), \quad
+  s_1 \sim \mathcal{N}(0, 1^2), \quad
+  \sigma_{\text{WLS}} \sim \mathcal{N}(0, 2.5^2)
+\]
+\end{itemize}
+
+**Indication Groups**
+
+- **Group 1: Hematologic malignancies**  
+  Includes classical Hodgkin lymphoma (CHL), diffuse large B-cell lymphoma (DLBCL),
+  follicular lymphoma (FL), multiple myeloma (MM), non-Hodgkin lymphoma (NHL),
+  and peripheral T-cell lymphoma (PTCL).
+
+- **Group 2: Gynecologic cancers**  
+  Includes cervical, endometrial, and ovarian cancers.
+
+- **Group 3: Thoracic malignancies**  
+  Includes non-small cell lung cancer (NSCLC), small cell lung cancer (SCLC),
+  and mesothelioma.
+
+- **Group 4: Urologic and gastrointestinal solid tumors**  
+  Includes bladder cancer, gastric cancer, and renal cell carcinoma (RCC).
+
+- **Group 5: Breast cancer**  
+  Includes breast cancer.
+
+If no indication is specified, the average ORR–PFS relationship across all 
+indication groups will be used.
+
+
