@@ -75,16 +75,21 @@ will follow Supplementary Materials E in @hampson2022improving.
 # Population level model \label{sec:gen_pop_level}
 
 The population level treatment effect, $\mu_P$, is assumed to come from a 
-mixture prior:
+mixture prior with a random mixing weight:
 
 \begin{align}
-\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2) ,
+\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2),\\
+\omega &\sim \text{Beta}(\alpha, \beta),
 \end{align}
 
 with the following components:
 
 - $w$ is a probability that $\mu_P$ comes from the enthusiastic prior component.
-The value of $w$ is determined by the industry benchmark.
+$\omega$ is treated as a random variable to incorporate uncertainty and 
+variability in the benchmark probability of success (PoS). The Beta prior 
+allows integration of historical information (e.g., industry Phase III 
+success rates or machine-learning-based predictions) while permitting 
+data-driven updating.
 
 - $Normal(\delta_P, \sigma^2_{P1})$ is the enthusiastic component, i.e., a 
 distribution which is centered at the target treatment effect $\delta_P$ (i.e.,
