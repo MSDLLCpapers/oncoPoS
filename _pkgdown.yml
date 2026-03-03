@@ -1,6 +1,6 @@
 destination: docs
 
-# url: 
+url: msdllcpapers.github.io/oncoPoS/
 
 template:
   bootstrap: 5
