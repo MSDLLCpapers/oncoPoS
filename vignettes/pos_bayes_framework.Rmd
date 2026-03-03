@@ -308,7 +308,7 @@ and treatment groups, respectively.
 
 When only single-arm data are available (i.e., no concurrent control
 arm), the observed ORR treatment effect cannot be computed directly
-from two-arm counts. Instead, following Weber et al. (2021), uncertainty
+from two-arm counts. Instead, following @weber2021applying, uncertainty
 in the control ORR is incorporated by placing a distribution over the
 Standard of Care (SOC) response rate, $p_{\text{SOC}}$, using
 user-specified lower and upper bounds.
