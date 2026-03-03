@@ -48,9 +48,12 @@ While the overall alpha level of 2.5% and power 95.5% could be seen as design
 features in general, these are not considered as direct design features for the 
 PoS estimation and therefore are not inputs in `oncoPoS` relevant functions.
 
-To proceed with the PoS estimation, an industry benchmark is required as well. 
-We'll assume that, without considering specific design features of this trial, 
-there is a 50% chance that such trial will be succesful.
+To proceed with the PoS estimation, an industry benchmark is required as
+well. We treat the benchmark as a random variable $\omega$, reflecting
+uncertainty in the prior probability of trial success. Without
+considering the specific design features of this trial, we assume there
+is a 50% chance that such a trial will be successful, i.e.,
+$\omega_{\text{mean}} = 0.5$.
 
 ## No earlier study data
 
@@ -67,14 +70,14 @@ gen_pos(
   J = 2,  
   nevents3 = c(370, 468), 
   hr_bound = c(0.779, 0.8204),
-  omega = 0.5,
+  omega_mean = 0.5,
   seed = 245
  ) 
-#> # A tibble: 2 × 3
-#>       J   pos pos_se
-#>   <int> <dbl>  <dbl>
-#> 1     1 0.404 0.0155
-#> 2     2 0.475 0.0158
+#> # A tibble: 2 × 5
+#>       J   pos pos_se omega_mean omega_var
+#>   <int> <dbl>  <dbl>      <dbl>     <dbl>
+#> 1     1 0.397 0.0109      0.503    0.0194
+#> 2     2 0.472 0.0112      0.503    0.0194
 ```
 
 ## Prior PFS data
