@@ -78,7 +78,7 @@ The population level treatment effect, $\mu_P$, is assumed to come from a
 mixture prior with a random mixing weight:
 
 \begin{align}
-\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2),\\
+\mu_{P} & \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2),\\
 \omega &\sim \text{Beta}(\alpha, \beta),
 \end{align}
 
@@ -246,9 +246,9 @@ $$
 $$
 a_0 \sim \mathcal{N}(0,\ 5^2), \quad
 b_0 \sim \mathcal{N}(2,\ 5^2), \quad
-s_0 \sim \mathcal{N}(0,\ 1^2), \quad
-s_1 \sim \mathcal{N}(0,\ 1^2), \quad
-\sigma_{\text{WLS}} \sim \mathcal{N}(0,\ 2.5^2)
+s_0 \sim \mathcal{N}(0,\ 5^2), \quad
+s_1 \sim \mathcal{N}(0,\ 5^2), \quad
+\sigma_{\text{WLS}} \sim \mathcal{N}(0,\ 5^2)
 $$
 
 ### Indication Groups
