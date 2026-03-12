@@ -255,9 +255,8 @@ $$
 
 **Group 1: Hematologic malignancies**
 
-Includes classical Hodgkin lymphoma (CHL), diffuse large B-cell lymphoma (DLBCL),
-follicular lymphoma (FL), multiple myeloma (MM), non-Hodgkin lymphoma (NHL),
-and peripheral T-cell lymphoma (PTCL).
+Includes classical Hodgkin lymphoma (CHL), diffuse large B-cell lymphoma (DLBCL), 
+multiple myeloma (MM), non-Hodgkin lymphoma (NHL), and peripheral T-cell lymphoma (PTCL).
 
 **Group 2: Gynecologic cancers**
 
