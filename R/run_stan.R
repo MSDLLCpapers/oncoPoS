@@ -74,7 +74,7 @@
 #' parameter for a phase 3 study and must be one of "large", 
 #' "substantial", "moderate", "small", "very small", Default: 'very small'
 #' @param indication Integer from 1 to 6 for selecting indication-specific 
-#' ORR–PFS regression parameters, as follows:
+#' ORR-PFS regression parameters, as follows:
 #' 1 = hematologic malignancies
 #' 2 = gynecologic cancers
 #' 3 = thoracic cancers
@@ -122,6 +122,8 @@
 #'   upp_soc_rr = 0.2, 
 #'   use_orr = TRUE, 
 #'   single_arm = TRUE,
+#'   ncores = 1,
+#'   nchains = 1,
 #'   seed=111)
 #' @seealso 
 #'  \code{\link[stats]{Normal}}
@@ -222,9 +224,8 @@ run_stan <- function(
   nu_0_vec <- c(0.1648034, 0.2021437, 0.1637840, 0.1596490, 0.1559987, 0.1789729)
   m_1_vec <- c(1.450295, 2.118675, 1.502140, 1.698569, 2.061274, 1.771319)
   nu_1_vec <- c(0.4741983, 0.5534602, 0.3682789, 0.3440543, 0.2589501, 0.3598188)
-  lm_sd <- 2.02218 #mean(posterior_draws$sigma_wls)
+  if (is.na(lm_sd)) lm_sd <- 2.02218 #mean(posterior_draws$sigma_wls)
   
-  indication <- indication
   if (is.na(m_0)) m_0 <- m_0_vec[indication]
   if (is.na(m_1)) m_1 <- m_1_vec[indication]
   if (is.na(nu_0)) nu_0 <- nu_0_vec[indication]
@@ -276,19 +277,31 @@ run_stan <- function(
   }
   
   rstan::rstan_options(auto_write = TRUE)
-  
-  package_path <- find.package('oncoPoS',lib.loc = .libPaths())
-  file_path <- file.path(package_path,'bin', 'stan', stan_file)
-  
-  fit_rstan <- rstan::stan(
-    file = file_path,
-    data = stan_list,
-    iter = niter,
-    chains = nchains,
-    cores = ncores,
-    seed = seed,
-    ...
+
+  stan_mod <- .load_stan_model(stan_file)
+  if (!is.null(stan_mod)) {
+    fit_rstan <- rstan::sampling(
+      object = stan_mod,
+      data   = stan_list,
+      iter   = niter,
+      chains = nchains,
+      cores  = ncores,
+      seed   = seed,
+      ...
     )
-  
+  } else {
+    file_path <- system.file('stan', stan_file, package = 'oncoPoS')
+    fit_rstan <- rstan::stan(
+      file   = file_path,
+      data   = stan_list,
+      iter   = niter,
+      chains = nchains,
+      cores  = ncores,
+      seed   = seed,
+      ...
+    )
+    .save_stan_model(fit_rstan@stanmodel, stan_file)
+  }
+
   return(list(fit_rstan = fit_rstan, stan_list = stan_list, stan_file = stan_file))
 }

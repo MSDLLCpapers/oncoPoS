@@ -48,7 +48,7 @@
 #' The posterior distribution of the log odds ratio is then estimated using 
 #' Bayesian inference via Stan.
 #'
-#' The Stan model (`estimate_ctrl.stan`) must be available in the working directory.
+#' The Stan model (`estimate_ctrl.stan`) is loaded from the installed package directory.
 #'
 #' @examples
 #' \dontrun{
@@ -63,6 +63,7 @@
 #'
 #' @rdname resp2oddsratio_estimate_ctrl
 #' @export
+#' @importFrom stats sd qnorm
 resp2oddsratio_estimate_ctrl <- function(
     n_resp_trt, 
     n_trt, 
@@ -71,6 +72,7 @@ resp2oddsratio_estimate_ctrl <- function(
     ci_rr = 0.8,
     niter = 1000,
     nchains = 4,
+    ncores = 4,
     seed = 123,
     refresh = 0,
     ...
@@ -105,6 +107,7 @@ resp2oddsratio_estimate_ctrl <- function(
     data = stan_data,
     iter = niter,
     chains = nchains,
+    cores = ncores,
     seed = seed,
     refresh = refresh,
     ...)

@@ -1,8 +1,8 @@
 #' @title PoS estimation
 #' @description
 #' Computes the predicted probability of success (PoS) for a phase III clinical 
-#' trial by integrating early-phase efficacy data—objective response rate (ORR) 
-#' and/or progression-free survival (PFS)—with prior beliefs about study 
+#' trial by integrating early-phase efficacy data -- objective response rate (ORR)
+#' and/or progression-free survival (PFS) -- with prior beliefs about study 
 #' success. The prior distribution for the benchmark PoS is specified as a Beta 
 #' distribution, parameterized by its mean and variance. Treatment effect 
 #' estimation for ORR supports both two-arm and single-arm designs, with the 
@@ -54,6 +54,8 @@
 #'   upp_soc_rr = 0.2,
 #'   use_orr = TRUE,
 #'   single_arm = TRUE,
+#'   ncores = 1,
+#'   nchains = 1,
 #'   seed = 222
 #' )
 #' @seealso 
@@ -101,8 +103,8 @@ gen_pos <- function(
     nu_1 = NA,
     lm_sd = NA,
     niter = 1000,
-    nchains = 4,
-    ncores = 4,
+    nchains = 1,
+    ncores = 1,
     seed,
     plots_out = FALSE,
     ...
@@ -186,5 +188,4 @@ gen_pos <- function(
   return(out)
 }
 
-#' @importFrom utils globalVariables
-utils::globalVariables(c('pos', 'reject', 'theta_P3_hat'))
+
