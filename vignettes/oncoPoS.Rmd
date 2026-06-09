@@ -3,14 +3,14 @@ title: "Introduction to oncoPoS"
 output:
   rmarkdown::html_vignette
 bibliography: "oncoPoS.bib"
-resource_files:
-   - package_manual.pdf
 vignette: >
   %\VignetteIndexEntry{Introduction to oncoPoS}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
+
+
 
 
 
@@ -29,9 +29,9 @@ vignette for details.
 
 The main functions of the `oncoPoS` are `run_stan` and `gen_pos`, which 
 generate the PoS estimate and its standard error (SE) at each planned analysis by 
-running `rstan`. Note that the SE is 
+running `rstan`. The SE is calculated as $\sqrt{\hat{p}(1-\hat{p})/N_{\text{draws}}}$, where $\hat{p}$ is the estimated PoS and $N_{\text{draws}}$ is the total number of post-warmup MCMC draws.
 
-The PoS estimate could be generated without considering an observed treatment effect in an earlier study, 
+The PoS estimate can be generated without considering an observed treatment effect from an earlier study, or it can incorporate prior ORR and/or PFS data as described in the sections below.
 
 # PoS estimate example
 
@@ -63,22 +63,22 @@ phase 3 through an objective response rate (ORR) or PFS, the PoS estimate at
 each analysis is calculated as following:
 
 
-```r
-library(oncoPoS)
 
+``` r
 gen_pos(
-  target_hr = 0.7,
-  J = 2,  
-  nevents3 = c(370, 468), 
-  hr_bound = c(0.779, 0.8204),
+  target_hr  = 0.7,
+  J          = 2,
+  nevents3   = c(370, 468),
+  hr_bound   = c(0.779, 0.8204),
   omega_mean = 0.5,
-  seed = 245
- ) 
+  seed       = 245,
+  refresh    = 0
+)
 #> # A tibble: 2 × 5
 #>       J   pos pos_se omega_mean omega_var
 #>   <int> <dbl>  <dbl>      <dbl>     <dbl>
-#> 1     1 0.397 0.0109      0.503    0.0194
-#> 2     2 0.472 0.0112      0.503    0.0194
+#> 1     1 0.416 0.0220      0.500    0.0208
+#> 2     2 0.474 0.0223      0.500    0.0208
 ```
 
 ## Prior PFS data
@@ -91,24 +91,26 @@ thus design a phase 3 trial. This additional information is incorporated in
 the PoS estimates as follows:
 
 
-```r
+
+``` r
 gen_pos(
-  target_hr = 0.7,
-  J = 2,  
-  nevents3 = c(370, 468), 
-  hr_bound = c(0.779, 0.8204),
-  omega_mean = 0.5, 
-  use_pfs = TRUE,
-  est_obs_pfs = 0.53, 
-  low_obs_pfs = 0.31, 
+  target_hr   = 0.7,
+  J           = 2,
+  nevents3    = c(370, 468),
+  hr_bound    = c(0.779, 0.8204),
+  omega_mean  = 0.5,
+  use_pfs     = TRUE,
+  est_obs_pfs = 0.53,
+  low_obs_pfs = 0.31,
   upp_obs_pfs = 0.91,
-  seed = 245
- ) 
+  seed        = 245,
+  refresh     = 0
+)
 #> # A tibble: 2 × 5
-#>       J   pos  pos_se omega_mean omega_var
-#>   <int> <dbl>   <dbl>      <dbl>     <dbl>
-#> 1     1 0.758 0.00958      0.529    0.0199
-#> 2     2 0.827 0.00846      0.529    0.0199
+#>       J   pos pos_se omega_mean omega_var
+#>   <int> <dbl>  <dbl>      <dbl>     <dbl>
+#> 1     1 0.732 0.0198      0.515    0.0173
+#> 2     2 0.816 0.0173      0.515    0.0173
 ```
 
 ## Prior ORR data
@@ -127,7 +129,7 @@ all indication groups) will be used.
 ### Indication Groups
 
 - **Group 1: Hematologic malignancies**  
-  Includes classical Hodgkin lymphoma (CHL), diffuse large B-cell lymphoma (DLBCL),
+  Includes classical Hodgkin lymphoma (cHL), diffuse large B-cell lymphoma (DLBCL),
   follicular lymphoma (FL), multiple myeloma (MM), non-Hodgkin lymphoma (NHL),
   and peripheral T-cell lymphoma (PTCL).
 - **Group 2: Gynecologic cancers**  
@@ -141,28 +143,30 @@ all indication groups) will be used.
   Includes breast cancer.
 
 Here we specify the indication group as breast cancer (Group 5):
-```r
-gen_pos(
-  target_hr = 0.7,
-  J = 2,  
-  nevents3 = c(370, 468), 
-  hr_bound = c(0.779, 0.8204),
-  omega_mean = 0.5,
-  use_orr = TRUE,
-  n_resp_trt2 = 33,
-  n_trt2 = 60,
-  n_resp_ctrl2 = 18, 
-  n_ctrl2 = 63,
-  indication = 5,
-  seed = 245
- ) 
-#> # A tibble: 2 × 5
-#>       J   pos  pos_se omega_mean omega_var
-#>   <int> <dbl>   <dbl>      <dbl>     <dbl>
-#> 1     1 0.819 0.00861      0.533    0.0197
-#> 2     2 0.886 0.00712      0.533    0.0197
-```
 
+
+``` r
+gen_pos(
+  target_hr    = 0.7,
+  J            = 2,
+  nevents3     = c(370, 468),
+  hr_bound     = c(0.779, 0.8204),
+  omega_mean   = 0.5,
+  use_orr      = TRUE,
+  n_resp_trt2  = 33,
+  n_trt2       = 60,
+  n_resp_ctrl2 = 18,
+  n_ctrl2      = 63,
+  indication   = 5,
+  seed         = 245,
+  refresh      = 0
+)
+#> # A tibble: 2 × 5
+#>       J   pos pos_se omega_mean omega_var
+#>   <int> <dbl>  <dbl>      <dbl>     <dbl>
+#> 1     1 0.86  0.0155      0.533    0.0187
+#> 2     2 0.898 0.0135      0.533    0.0187
+```
 
 ### Single-arm setting
 
@@ -177,26 +181,28 @@ and upper bounds on the control ORR:
 In this setting, `n_resp_ctrl2` and `n_ctrl2` are replaced by `low_soc_rr`
 and `upp_soc_rr`. For example, assuming the SOC ORR is bounded between 5%
 and 20%:
-```r
+
+
+``` r
 gen_pos(
-  target_hr = 0.7,
-  J = 2,
-  nevents3 = c(370, 468),
-  hr_bound = c(0.779, 0.8204),
-  omega_mean = 0.5,
-  use_orr = TRUE,
+  target_hr   = 0.7,
+  J           = 2,
+  nevents3    = c(370, 468),
+  hr_bound    = c(0.779, 0.8204),
+  omega_mean  = 0.5,
+  use_orr     = TRUE,
   n_resp_trt2 = 33,
-  n_trt2 = 60,
-  single_arm = TRUE,
-  low_soc_rr = 0.05,
-  upp_soc_rr = 0.20,
-  indication = 5,
-  seed = 245
+  n_trt2      = 60,
+  single_arm  = TRUE,
+  low_soc_rr  = 0.05,
+  upp_soc_rr  = 0.20,
+  indication  = 5,
+  seed        = 245,
+  refresh     = 0
 )
 #> # A tibble: 2 × 5
-#>       J   pos  pos_se omega_mean omega_var
-#>   <int> <dbl>   <dbl>      <dbl>     <dbl>
-#> 1     1 0.871 0.00750      0.531    0.0197
-#> 2     2 0.922 0.00601      0.531    0.0197
+#>       J   pos pos_se omega_mean omega_var
+#>   <int> <dbl>  <dbl>      <dbl>     <dbl>
+#> 1     1 0.864 0.0153      0.539    0.0206
+#> 2     2 0.91  0.0128      0.539    0.0206
 ```
-

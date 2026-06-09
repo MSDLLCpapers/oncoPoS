@@ -36,8 +36,8 @@ gen_pos(
   nu_1 = NA,
   lm_sd = NA,
   niter = 1000,
-  nchains = 4,
-  ncores = 4,
+  nchains = 1,
+  ncores = 1,
   seed,
   plots_out = FALSE,
   ...
@@ -56,10 +56,9 @@ alternative hypothesis)}
 
 \item{omega_mean}{Mean of the Beta prior for \code{omega}. \code{omega} is
 the probability that a treatment effect comes from a enthusiastic prior
-component, i.e., initial benchmarking probability for the study success.
-Default: 0.52.}
+component, i.e., initial benchmarking probability for the study success}
 
-\item{omega_var}{Variance of the Beta prior for \code{omega}. Default: 0.02.}
+\item{omega_var}{Variance of the Beta prior for \code{omega}.}
 
 \item{est_obs_pfs}{estimated PFS hazard ratio based on prior/earlier study}
 
@@ -114,7 +113,7 @@ parameter for a phase 3 study and must be one of "large",
 \item{ratio}{randomization ratio of experimental arm compared to control}
 
 \item{indication}{Integer from 1 to 6 for selecting indication-specific
-ORR–PFS regression parameters, as follows:
+ORR-PFS regression parameters, as follows:
 1 = hematologic malignancies
 2 = gynecologic cancers
 3 = thoracic cancers
@@ -167,8 +166,8 @@ autocorrelation plots are provided as well.
 }
 \description{
 Computes the predicted probability of success (PoS) for a phase III clinical
-trial by integrating early-phase efficacy data—objective response rate (ORR)
-and/or progression-free survival (PFS)—with prior beliefs about study
+trial by integrating early-phase efficacy data -- objective response rate (ORR)
+and/or progression-free survival (PFS) -- with prior beliefs about study
 success. The prior distribution for the benchmark PoS is specified as a Beta
 distribution, parameterized by its mean and variance. Treatment effect
 estimation for ORR supports both two-arm and single-arm designs, with the
@@ -215,6 +214,8 @@ gen_pos(
   upp_soc_rr = 0.2,
   use_orr = TRUE,
   single_arm = TRUE,
+  ncores = 1,
+  nchains = 1,
   seed = 222
 )
 }

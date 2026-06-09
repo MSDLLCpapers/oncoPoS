@@ -44,8 +44,6 @@ navbar:
         href: articles/testing-plan.html
       - text: "Testing Report"
         href: articles/code-covr.html
-      - text: "Program Development and Validation Tracker"
-        href: articles/pdvt.html
     - text: "Source code"
       href: https://github.com/Merck/oncoPoS
 articles:
@@ -56,6 +54,3 @@ articles:
   contents:
   - code-covr
   - testing-plan
-- title: Program Development and Validation Tracker
-  contents:
-  - pdvt

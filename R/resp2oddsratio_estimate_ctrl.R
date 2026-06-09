@@ -71,8 +71,8 @@ resp2oddsratio_estimate_ctrl <- function(
     upp_soc_rr, 
     ci_rr = 0.8,
     niter = 1000,
-    nchains = 4,
-    ncores = 4,
+    nchains = 1,
+    ncores = 1,
     seed = 123,
     refresh = 0,
     ...
@@ -96,21 +96,35 @@ resp2oddsratio_estimate_ctrl <- function(
   )
 
   rstan::rstan_options(auto_write = TRUE)
-  
-  stan_file <- "estimate_ctrl.stan"
-  package_path <- find.package('oncoPoS',lib.loc = .libPaths())
-  file_path <- file.path(package_path,'bin', 'stan', stan_file)
-  
+
+  stan_file_name <- "estimate_ctrl.stan"
+  stan_mod <- .load_stan_model(stan_file_name)
   # Run Stan model
-  fit <- rstan::stan(
-    file = file_path,
-    data = stan_data,
-    iter = niter,
-    chains = nchains,
-    cores = ncores,
-    seed = seed,
-    refresh = refresh,
-    ...)
+  if (!is.null(stan_mod)) {
+    fit <- rstan::sampling(
+      object  = stan_mod,
+      data    = stan_data,
+      iter    = niter,
+      chains  = nchains,
+      cores   = ncores,
+      seed    = seed,
+      refresh = refresh,
+      ...
+    )
+  } else {
+    file_path <- system.file('stan', stan_file_name, package = 'oncoPoS')
+    fit <- rstan::stan(
+      file    = file_path,
+      data    = stan_data,
+      iter    = niter,
+      chains  = nchains,
+      cores   = ncores,
+      seed    = seed,
+      refresh = refresh,
+      ...
+    )
+    .save_stan_model(fit@stanmodel, stan_file_name)
+  }
   
   # Extract log(OR) samples
   posterior <- rstan::extract(fit)

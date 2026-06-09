@@ -112,7 +112,7 @@ parameter for a phase 3 study and must be one of "large",
 \item{ratio}{randomization ratio of experimental arm compared to control}
 
 \item{indication}{Integer from 1 to 6 for selecting indication-specific
-ORR–PFS regression parameters, as follows:
+ORR-PFS regression parameters, as follows:
 1 = hematologic malignancies
 2 = gynecologic cancers
 3 = thoracic cancers
@@ -206,6 +206,8 @@ The contents of this section are shown in PDF user manual only.
   upp_soc_rr = 0.2, 
   use_orr = TRUE, 
   single_arm = TRUE,
+  ncores = 1,
+  nchains = 1,
   seed=111)
 }
 \seealso{

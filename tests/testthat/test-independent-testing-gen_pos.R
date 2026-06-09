@@ -1,4 +1,9 @@
 test_that("check results of gen_pos", {
+  local_mocked_bindings(
+    sampling = mock_rstan_sampling,
+    stan     = mock_rstan_stan,
+    .package = "rstan"
+  )
   target_hr = 0.7
   J = 2
   nevents3 = c(370, 468)

@@ -12,7 +12,8 @@ resp2oddsratio_estimate_ctrl(
   upp_soc_rr,
   ci_rr = 0.8,
   niter = 1000,
-  nchains = 4,
+  nchains = 1,
+  ncores = 1,
   seed = 123,
   refresh = 0,
   ...
@@ -34,13 +35,13 @@ interval.}
 
 \item{nchains}{number of chains to be used in stan run, Default: 4}
 
+\item{ncores}{number of cores to be used in stan run, Default: 4}
+
 \item{seed}{seed to be used in stan run}
 
 \item{refresh}{integer, progress indicator, Default: 0 (turned off)}
 
 \item{...}{params to pass to stan run}
-
-\item{ncores}{number of cores to be used in stan run, Default: 4}
 }
 \value{
 A list containing:
@@ -63,7 +64,7 @@ credible interval, is transformed into a normal prior on the logit scale.
 The posterior distribution of the log odds ratio is then estimated using
 Bayesian inference via Stan.
 
-The Stan model (\code{estimate_ctrl.stan}) must be available in the working directory.
+The Stan model (\code{estimate_ctrl.stan}) is loaded from the installed package directory.
 }
 \section{Specification}{
 

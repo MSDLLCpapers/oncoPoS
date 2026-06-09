@@ -9,9 +9,9 @@ Authors@R: c(
     person("Alex", "Ziyu Jiang", email = "jiang14@uw.edu", role = c("aut")),
     person("BARDS, Merck & Co., Inc.", role = c("cph")) )
 Description: Performs Bayesian PoS calculations for phase 3 oncology studies.
-Depends: R (>= 3.6.0)
+Depends: R (>= 4.1.0)
 License: file LICENSE
-URL: https://github.com/MSDLLCPapers/onsoPoS, https://msdllcpapers.github.io/oncoPoS/
+URL: https://github.com/MSDLLCPapers/oncoPoS, https://msdllcpapers.github.io/oncoPoS/
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -35,4 +35,4 @@ Suggests:
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+Config/roxygen2/version: 8.0.0

@@ -3,8 +3,6 @@ title: "PoS Bayesian Framework for Pivotal Oncology Trials"
 output:
   rmarkdown::html_vignette
 bibliography: "oncoPoS.bib"
-resource_files:
-   - package_manual.pdf
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{PoS Bayesian Framework for Pivotal Oncology Trials}
@@ -16,12 +14,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   out.width = "100%"
 )
-```
-
-```{r, include=FALSE}
-manual <-devtools::build_manual(path = ".")
-manual <- basename(grep("--output=", manual$command, value = TRUE))
-file.rename(from = manual, to = "package_manual.pdf")
 ```
 
 
@@ -84,7 +76,7 @@ mixture prior with a random mixing weight:
 
 with the following components:
 
-- $w$ is a probability that $\mu_P$ comes from the enthusiastic prior component.
+- $\omega$ is the probability that $\mu_P$ comes from the enthusiastic prior component.
 $\omega$ is treated as a random variable to incorporate uncertainty and 
 variability in the benchmark probability of success (PoS). The Beta prior 
 allows integration of historical information (e.g., industry Phase III 
@@ -255,8 +247,8 @@ $$
 
 **Group 1: Hematologic malignancies**
 
-Includes classical Hodgkin lymphoma (CHL), diffuse large B-cell lymphoma (DLBCL), 
-multiple myeloma (MM), non-Hodgkin lymphoma (NHL), and peripheral T-cell lymphoma (PTCL).
+Includes classical Hodgkin lymphoma (cHL), diffuse large B-cell lymphoma (DLBCL),
+follicular lymphoma (FL), multiple myeloma (MM), non-Hodgkin lymphoma (NHL), and peripheral T-cell lymphoma (PTCL).
 
 **Group 2: Gynecologic cancers**
 
@@ -341,7 +333,7 @@ $$
 
 $\Phi^{-1}(\cdot)$ denotes the quantile function of the standard normal
 distribution. `ci_rr` is the user-specified confidence level for the SOC
-response bounds (default = 95%). Lower values may be used for more
+response bounds (default = 80%). Lower values may be used for more
 conservative assumptions or when the SOC data are uncertain. In the single-arm setting,
 $x_{\text{SOC}}$ and $n_{\text{SOC}}$ entering the expressions above are drawn
 from the distribution over $p_{\text{SOC}}$ rather than observed directly.

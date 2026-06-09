@@ -1,4 +1,9 @@
 test_that("resp2oddsratio_estimate_ctrl() produces a smaller mean odds ratio when the observed RR in trt is higher", {
+  local_mocked_bindings(
+    sampling = mock_rstan_sampling,
+    stan     = mock_rstan_stan,
+    .package = "rstan"
+  )
   n_resp_trt1 <- 80 
   n_resp_trt2 <- 40 
   n_trt <- 100
@@ -10,7 +15,8 @@ test_that("resp2oddsratio_estimate_ctrl() produces a smaller mean odds ratio whe
      n_trt = n_trt,
      low_soc_rr = low_soc_rr,
      upp_soc_rr = upp_soc_rr,
-     ci_rr = 0.80
+     ci_rr = 0.80,
+     ncores = 1
    )
   
   log_or_low <-  resp2oddsratio_estimate_ctrl(
@@ -18,7 +24,8 @@ test_that("resp2oddsratio_estimate_ctrl() produces a smaller mean odds ratio whe
     n_trt = n_trt,
     low_soc_rr = low_soc_rr,
     upp_soc_rr = upp_soc_rr,
-    ci_rr = 0.80
+    ci_rr = 0.80,
+    ncores = 1
   )
   
   expect_lt(exp(log_or_high$est), exp(log_or_low$est))
@@ -49,6 +56,11 @@ test_that("check the prior computation of mu and sigma on logit scale", {
 })
 
 test_that("check the output structure of resp2oddsratio_estimate_ctrl", {
+  local_mocked_bindings(
+    sampling = mock_rstan_sampling,
+    stan     = mock_rstan_stan,
+    .package = "rstan"
+  )
   n_resp_trt  = 33
   n_trt       = 60
   low_soc_rr  = 0.15

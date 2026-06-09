@@ -1,4 +1,9 @@
 test_that("Test the stan_list and stan_file when different combinations of endpoints are used", {
+  local_mocked_bindings(
+    sampling = mock_rstan_sampling,
+    stan     = mock_rstan_stan,
+    .package = "rstan"
+  )
   target_hr = 0.7
   J = 2
   nevents3 = c(370, 468)
