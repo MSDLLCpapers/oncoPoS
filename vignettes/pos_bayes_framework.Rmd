@@ -3,8 +3,6 @@ title: "PoS Bayesian Framework for Pivotal Oncology Trials"
 output:
   rmarkdown::html_vignette
 bibliography: "oncoPoS.bib"
-resource_files:
-   - package_manual.pdf
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{PoS Bayesian Framework for Pivotal Oncology Trials}
@@ -16,12 +14,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   out.width = "100%"
 )
-```
-
-```{r, include=FALSE, eval = FALSE}
-manual <-devtools::build_manual(path = ".")
-manual <- basename(grep("--output=", manual$command, value = TRUE))
-file.rename(from = manual, to = "package_manual.pdf")
 ```
 
 
@@ -75,16 +67,21 @@ will follow Supplementary Materials E in @hampson2022improving.
 # Population level model \label{sec:gen_pop_level}
 
 The population level treatment effect, $\mu_P$, is assumed to come from a 
-mixture prior:
+mixture prior with a random mixing weight:
 
 \begin{align}
-\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2) ,
+\mu_{P} & \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2),\\
+\omega &\sim \text{Beta}(\alpha, \beta),
 \end{align}
 
 with the following components:
 
-- $w$ is a probability that $\mu_P$ comes from the enthusiastic prior component.
-The value of $w$ is determined by the industry benchmark.
+- $\omega$ is the probability that $\mu_P$ comes from the enthusiastic prior component.
+$\omega$ is treated as a random variable to incorporate uncertainty and 
+variability in the benchmark probability of success (PoS). The Beta prior 
+allows integration of historical information (e.g., industry Phase III 
+success rates or machine-learning-based predictions) while permitting 
+data-driven updating.
 
 - $Normal(\delta_P, \sigma^2_{P1})$ is the enthusiastic component, i.e., a 
 distribution which is centered at the target treatment effect $\delta_P$ (i.e.,
@@ -189,3 +186,155 @@ Based on the approximated correlation between $\theta_{ORR, 2}$ and
 $\theta_{PFS, 2}$, a distribution for $\theta_{PFS, 2}$ can be obtained and, 
 therefore, a predicated efficacy PoS can be estimated as using models that are 
 outlined above. 
+
+## Indication-specific surrogate-primary endpoint relationships (e.g., ORR $\rightarrow$ PFS) {#sec:indication_specific}
+
+When early endpoint objective response rate (ORR) is used to predict
+phase III progression-free survival (PFS), the strength and direction
+of the association may vary substantially across cancer types.
+To account for this heterogeneity, we group cancer indications into five categories,
+each associated with a distinct set of ORR–PFS regression parameters derived from
+prior Bayesian hierarchical modeling.
+
+Trial indexed by: $j = 1, \dots, J$. Indication indexed by: $k = z_j \in \{1, \dots, K\}$.
+
+$\theta^P_j$: treatment effect on endpoint $P$ at trial $j$.
+$\sigma^P_j$: standard error of treatment effect on endpoint $P$ at trial $j$.
+
+### Level 1: Observed trial-level model
+
+Each trial reports an observed log-odds ratio for ORR, $\hat\theta^{\text{ORR}}_j$,
+and an observed log-hazard ratio for PFS, $\hat\theta^{\text{PFS}}_j$, modeled as:
+
+$$
+\hat\theta^{\text{ORR}}_j \sim \mathcal{N}\!\left(\theta^{\text{ORR}}_j,\ \left(\sigma^{\text{ORR}}_j\right)^2\right)
+$$
+
+$$
+\hat\theta^{\text{PFS}}_j \sim \mathcal{N}\!\left(\theta^{\text{PFS}}_j,\ \left(\sigma^{\text{PFS}}_j\right)^2\right)
+$$
+
+Conditional on the (latent) true PFS effect, the true ORR effect follows an
+indication-specific regression:
+
+$$
+\theta^{\text{ORR}}_j \;\sim\; \mathcal{N}\!\left(\alpha_{z_j} + \beta_{z_j}\,\theta^{\text{PFS}}_j,\;
+\frac{\sigma_{\text{WLS}}^{2}}{N_{\text{patients},j}}\right)
+$$
+
+### Level 2: Indication-specific regression parameters
+
+Information is shared across indications via hierarchical modeling.
+Each pair $(\alpha_k, \beta_k)$ is learned adaptively across indications:
+
+$$
+\alpha_k \sim \mathcal{N}(a_0,\ s_0^2), \qquad
+\beta_k \sim \mathcal{N}(b_0,\ s_1^2), \qquad
+k = 1, \dots, 5
+$$
+
+### Level 3: Population-level hyperpriors
+
+$$
+a_0 \sim \mathcal{N}(0,\ 5^2), \quad
+b_0 \sim \mathcal{N}(2,\ 5^2), \quad
+s_0 \sim \mathcal{N}(0,\ 5^2), \quad
+s_1 \sim \mathcal{N}(0,\ 5^2), \quad
+\sigma_{\text{WLS}} \sim \mathcal{N}(0,\ 5^2)
+$$
+
+### Indication Groups
+
+**Group 1: Hematologic malignancies**
+
+Includes classical Hodgkin lymphoma (cHL), diffuse large B-cell lymphoma (DLBCL),
+follicular lymphoma (FL), multiple myeloma (MM), non-Hodgkin lymphoma (NHL), and peripheral T-cell lymphoma (PTCL).
+
+**Group 2: Gynecologic cancers**
+
+Includes cervical, endometrial, and ovarian cancers.
+
+**Group 3: Thoracic malignancies**
+
+Includes non-small cell lung cancer (NSCLC), small cell lung cancer (SCLC),
+and mesothelioma.
+
+**Group 4: Urologic and gastrointestinal solid tumors**
+
+Includes bladder cancer, gastric cancer, and renal cell carcinoma (RCC).
+
+**Group 5: Breast cancer**
+
+Includes breast cancer.
+
+> If no indication is specified, the average ORR–PFS relationship across all
+> indication groups will be used.
+
+
+## Prior ORR data {#sec:orr_data}
+
+The method for computing the observed log-odds ratio
+$\hat\theta^{\text{ORR}}$ and its standard error differs depending on whether
+the earlier study was a two-arm or single-arm trial.
+
+### Two-arm setting
+
+In the two-arm setting, $\hat\theta^{\text{ORR}}$ and its standard error are
+estimated directly from the observed response counts in each arm using
+frequentist estimation:
+
+$$
+\hat\theta^{\text{ORR}} = \log\!\left(\frac{x_{\text{SOC}}}{n_{\text{SOC}} - x_{\text{SOC}}}\right) - \log\!\left(\frac{x_{\text{trt}}}{n_{\text{trt}} - x_{\text{trt}}}\right)
+$$
+
+$$
+SE\!\left(\hat\theta^{\text{ORR}}\right) = \sqrt{\frac{1}{x_{\text{trt}}} + \frac{1}{n_{\text{trt}} - x_{\text{trt}}} + \frac{1}{x_{\text{SOC}}} + \frac{1}{n_{\text{SOC}} - x_{\text{SOC}}}}
+$$
+
+where $x_{\text{SOC}}$, $x_{\text{trt}}$ are the number of responders and
+$n_{\text{SOC}}$, $n_{\text{trt}}$ are the total number of patients in the SOC
+and treatment groups, respectively.
+
+### Single-arm setting
+
+When only single-arm data are available (i.e., no concurrent control
+arm), the observed ORR treatment effect cannot be computed directly
+from two-arm counts. Instead, following @weber2021applying, uncertainty
+in the control ORR is incorporated by placing a distribution over the
+Standard of Care (SOC) response rate, $p_{\text{SOC}}$, using
+user-specified lower and upper bounds.
+
+Let `low_soc_rr` and `upp_soc_rr` denote the lower and upper bounds for
+the control ORR. The corresponding logit-scale bounds are:
+
+$$
+\texttt{logit_low} = \log\!\left(\frac{\texttt{low_soc_rr}}{1 - \texttt{low_soc_rr}}\right), \qquad
+\texttt{logit_upp} = \log\!\left(\frac{\texttt{upp_soc_rr}}{1 - \texttt{upp_soc_rr}}\right)
+$$
+
+Rather than fixing $p_{\text{SOC}}$ to a point estimate, a normal
+distribution is placed on the logit scale:
+
+$$
+\text{logit}(p_{\text{SOC}}) \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+\;\Rightarrow\; p_{\text{SOC}} = \frac{e^x}{1 + e^x}, \quad x \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+$$
+
+where the mean and standard deviation are derived from the specified
+bounds:
+
+$$
+\mu_{\text{SOC}} = \frac{\texttt{logit_low} + \texttt{logit_upp}}{2}
+$$
+
+$$
+\sigma_{\text{SOC}} = \frac{\texttt{logit_upp} - \texttt{logit_low}}{2\cdot\Phi^{-1}\!\left(1 - \dfrac{1 - \texttt{ci_rr}}{2}\right)}
+$$
+
+$\Phi^{-1}(\cdot)$ denotes the quantile function of the standard normal
+distribution. `ci_rr` is the user-specified confidence level for the SOC
+response bounds (default = 80%). Lower values may be used for more
+conservative assumptions or when the SOC data are uncertain. In the single-arm setting,
+$x_{\text{SOC}}$ and $n_{\text{SOC}}$ entering the expressions above are drawn
+from the distribution over $p_{\text{SOC}}$ rather than observed directly.
+

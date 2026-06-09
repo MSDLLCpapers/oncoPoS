@@ -1,0 +1,9 @@
+sysname: Windows
+machine: x86-64
+r_version: 4.5.1
+rstan_version: 2.32.7
+stanheaders_version: 2.32.10
+compiled_at: 2026-06-03T14:21:39
+stan_files: estimate_ctrl.stan, phase23_interim_both.stan,
+        phase23_interim_none.stan, phase23_interim_orr.stan,
+        phase23_interim_pfs.stan

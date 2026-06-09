@@ -22,4 +22,3 @@
 ^data-raw$
 ^\.merck\.yaml$
 ^\.github$
-^src/stan/\*\.rds$
