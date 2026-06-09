@@ -7,7 +7,7 @@ Authors@R: c(
     person("Xiang", "Peng", email = "xiang.peng@merck.com", role = c("aut")),
     person("Shun", "Rao", email = "srao7@mdanderson.org", role = c("aut")),
     person("Alex", "Ziyu Jiang", email = "jiang14@uw.edu", role = c("aut")),
-    person("BARDS, Merck & Co., Inc.", role = c("cph")) )
+    person("BARDS, MSD", role = c("cph")) )
 Description: Performs Bayesian PoS calculations for phase 3 oncology studies.
 Depends: R (>= 4.1.0)
 License: file LICENSE
