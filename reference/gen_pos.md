@@ -1,6 +1,13 @@
 # PoS estimation
 
-PoS estimation
+Computes the predicted probability of success (PoS) for a phase III
+clinical trial by integrating early-phase efficacy data – objective
+response rate (ORR) and/or progression-free survival (PFS) – with prior
+beliefs about study success. The prior distribution for the benchmark
+PoS is specified as a Beta distribution, parameterized by its mean and
+variance. Treatment effect estimation for ORR supports both two-arm and
+single-arm designs, with the latter incorporating historical control
+information.
 
 ## Usage
 
@@ -10,7 +17,8 @@ gen_pos(
   J,
   nevents3,
   hr_bound,
-  omega,
+  omega_mean = 0.52,
+  omega_var = 0.02,
   est_obs_pfs,
   low_obs_pfs,
   upp_obs_pfs,
@@ -20,19 +28,24 @@ gen_pos(
   n_ctrl2,
   n_resp_trt2,
   n_resp_ctrl2,
+  low_soc_rr,
+  upp_soc_rr,
+  ci_rr = 0.8,
   use_orr = FALSE,
+  single_arm = FALSE,
   use_pfs = FALSE,
   het_degree_p2 = "small",
   het_degree_p3 = "very small",
   ratio = 1,
+  indication = 6,
   m_0 = NA,
   m_1 = NA,
   nu_0 = NA,
   nu_1 = NA,
   lm_sd = NA,
   niter = 1000,
-  nchains = 4,
-  ncores = 4,
+  nchains = 1,
+  ncores = 1,
   seed,
   plots_out = FALSE,
   ...
@@ -58,11 +71,15 @@ gen_pos(
 
   numeric vector of hazard ratio bounds for analyses in phase 3 study
 
-- omega:
+- omega_mean:
 
-  probability that a treatment effect comes from a enthusiastic prior
-  component, i.e., initial benchmarking probability for the study
-  success
+  Mean of the Beta prior for `omega`. `omega` is the probability that a
+  treatment effect comes from a enthusiastic prior component, i.e.,
+  initial benchmarking probability for the study success
+
+- omega_var:
+
+  Variance of the Beta prior for `omega`.
 
 - est_obs_pfs:
 
@@ -103,10 +120,28 @@ gen_pos(
 
   number of responses in control arm from a prior/earlier study
 
+- low_soc_rr:
+
+  Lower bound of historical control response rate for single-arm
+  estimation.
+
+- upp_soc_rr:
+
+  Upper bound of historical control response rate for single-arm
+  estimation.
+
+- ci_rr:
+
+  Confidence level for control response rate bounds, Default: 0.8.
+
 - use_orr:
 
   whether response data from a prior/earlier study should be used,
   Default: FALSE
+
+- single_arm:
+
+  whether ORR data is from a single-arm trial, Default: FALSE.
 
 - use_pfs:
 
@@ -129,33 +164,45 @@ gen_pos(
 
   randomization ratio of experimental arm compared to control
 
+- indication:
+
+  Integer from 1 to 6 for selecting indication-specific ORR-PFS
+  regression parameters, as follows: 1 = hematologic malignancies 2 =
+  gynecologic cancers 3 = thoracic cancers 4 = other solid tumors 5 =
+  breast cancer 6 = any tumor type Default: 6
+
 - m_0:
 
   intercept for linear regression of log treatment effect of PFS on log
   treatment effect on response. A value is expected only when
-  `use_orr = TRUE` and `use_pfs = TRUE`, Default: NA
+  `use_orr = TRUE` and `use_pfs = TRUE`. Auto-filled based on
+  `indication` if not supplied.
 
 - m_1:
 
   slope for linear regression of log treatment effect of PFS on log
   treatment effect on response. A value is expected only when
-  `use_orr = TRUE` and `use_pfs = TRUE`, Default: NA
+  `use_orr = TRUE` and `use_pfs = TRUE`. Auto-filled based on
+  `indication` if not supplied.
 
 - nu_0:
 
   standard error of `m_0`. A value is expected only when
-  `use_orr = TRUE` and `use_pfs = TRUE`, Default: NA
+  `use_orr = TRUE` and `use_pfs = TRUE`. Auto-filled based on
+  `indication` if not supplied.
 
 - nu_1:
 
   standard error of `m_1`. A value is expected only when
-  `use_orr = TRUE` and `use_pfs = TRUE`, Default: NA
+  `use_orr = TRUE` and `use_pfs = TRUE`. Auto-filled based on
+  `indication` if not supplied.
 
 - lm_sd:
 
   linear regression residual variance of log treatment effect of PFS on
   log treatment effect on response. A value is expected only when
-  `use_orr = TRUE` and `use_pfs = TRUE`, Default: NA
+  `use_orr = TRUE` and `use_pfs = TRUE`. Auto-filled based on
+  `indication` if not supplied.
 
 - niter:
 
@@ -184,9 +231,10 @@ gen_pos(
 
 ## Value
 
-tibble of PoS estimates and the corresponding standard errors for each
-analysis. If `plots_out` is turned on, then the MCMC chains mixing and
-autocorrelation plots are provided as well.
+tibble of PoS estimates, the corresponding standard errors for each
+analysis, and the posterior mean and variance for omega. If `plots_out`
+is turned on, then the MCMC chains mixing and autocorrelation plots are
+provided as well.
 
 ## Specification
 
@@ -196,8 +244,8 @@ The contents of this section are shown in PDF user manual only.
 
 [`gather_draws`](https://mjskay.github.io/tidybayes/reference/spread_draws.html)
 [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html),
-[`group_by`](https://dplyr.tidyverse.org/reference/group_by.html),
-[`summarise`](https://dplyr.tidyverse.org/reference/summarise.html)
+[`summarise`](https://dplyr.tidyverse.org/reference/summarise.html),
+[`group_by`](https://dplyr.tidyverse.org/reference/group_by.html)
 [`map2`](https://purrr.tidyverse.org/reference/map2.html),
 [`reexports`](https://purrr.tidyverse.org/reference/reexports.html)
 [`MCMC-traces`](https://mc-stan.org/bayesplot/reference/MCMC-traces.html),
@@ -206,26 +254,36 @@ The contents of this section are shown in PDF user manual only.
 ## Examples
 
 ``` r
-# use PFS data from a prior study
+# Using both ORR and PFS from a prior single-arm study with a Beta prior on 
+# omega
 
-  gen_pos(
-    target_hr = 0.7, 
-    J = 2,  
-    nevents3 = c(370, 468), 
-    hr_bound = c(0.779, 0.8204), 
-    omega = 0.5, 
-    est_obs_pfs = 0.88, 
-    low_obs_pfs = 0.74, 
-    upp_obs_pfs = 1.05, 
-    use_pfs = TRUE, 
-    seed = 325,
-    ncores = 1,
-    nchains = 1) 
+gen_pos(
+  target_hr = 0.70,
+  J = 2,
+  nevents3 = c(370, 468),
+  hr_bound = c(0.7790, 0.8204),
+  thres = 0.01,
+  omega_mean = 0.3,
+  omega_var = 0.03,
+  est_obs_pfs = 0.73,
+  low_obs_pfs = 0.61,
+  upp_obs_pfs = 0.91,
+  use_pfs = TRUE,
+  n_trt2 = 100,
+  n_resp_trt2 = 40,
+  low_soc_rr = 0.05,
+  upp_soc_rr = 0.2,
+  use_orr = TRUE,
+  single_arm = TRUE,
+  ncores = 1,
+  nchains = 1,
+  seed = 222
+)
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 6e-06 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+#> Chain 1: Gradient evaluation took 7e-06 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -242,13 +300,23 @@ The contents of this section are shown in PDF user manual only.
 #> Chain 1: Iteration: 900 / 1000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 1000 / 1000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 0.016 seconds (Warm-up)
-#> Chain 1:                0.008 seconds (Sampling)
-#> Chain 1:                0.024 seconds (Total)
+#> Chain 1:  Elapsed Time: 0.015 seconds (Warm-up)
+#> Chain 1:                0.011 seconds (Sampling)
+#> Chain 1:                0.026 seconds (Total)
 #> Chain 1: 
-#> # A tibble: 2 × 3
-#>       J   pos pos_se
-#>   <int> <dbl>  <dbl>
-#> 1     1 0.202 0.0180
-#> 2     2 0.322 0.0209
+#> Warning: There were 1 divergent transitions after warmup. See
+#> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+#> to find out why this is a problem and how to eliminate them.
+#> Warning: Examine the pairs() plot to diagnose sampling problems
+#> Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+#> Running the chains for more iterations may help. See
+#> https://mc-stan.org/misc/warnings.html#bulk-ess
+#> Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.
+#> Running the chains for more iterations may help. See
+#> https://mc-stan.org/misc/warnings.html#tail-ess
+#> # A tibble: 2 × 5
+#>       J   pos pos_se omega_mean omega_var
+#>   <int> <dbl>  <dbl>      <dbl>     <dbl>
+#> 1     1 0.634 0.0215      0.350    0.0304
+#> 2     2 0.748 0.0194      0.350    0.0304
 ```

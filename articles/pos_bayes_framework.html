@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>PoS Bayesian Framework for Pivotal Oncology Trials • oncoPoS</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="PoS Bayesian Framework for Pivotal Oncology Trials">
@@ -54,7 +54,7 @@
       <h1>PoS Bayesian Framework for Pivotal Oncology Trials</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/MSDLLCPapers/onsoPoS/blob/main/vignettes/pos_bayes_framework.Rmd" class="external-link"><code>vignettes/pos_bayes_framework.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MSDLLCPapers/oncoPoS/blob/main/vignettes/pos_bayes_framework.Rmd" class="external-link"><code>vignettes/pos_bayes_framework.Rmd</code></a></small>
       <div class="d-none name"><code>pos_bayes_framework.Rmd</code></div>
     </div>
 
@@ -91,7 +91,7 @@ respectively).</p>
 study (phase I/II, phase II),
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">\hat{\theta}_{P2}</annotation></semantics></math>,
 is assumed to have the following form:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>,</mo><msubsup><mi>ℐ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>,</mo><msubsup><mi>ℐ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \hat{\theta}_{P2} \sim Normal(\theta_{P2}, \mathcal{I}^{-1}_{P2}) \label{eq:ph2_est},
 \end{align}</annotation></semantics></math></p>
 <p>where
@@ -105,7 +105,7 @@ is the Fisher information for
 Using Bayesian framework, the prior for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">\theta_{P2}</annotation></semantics></math>
 is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>τ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\theta_{P2} \sim Normal (\mu_P, \tau_{P2}^2),</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>τ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">\theta_{P2} \sim Normal (\mu_P, \tau_{P2}^2),</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mu_P</annotation></semantics></math>
 is a population level parameter for the treatment effect on
@@ -115,13 +115,13 @@ characterizes the degree of heterogeneity in the treatment effect on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
 across different earlier studies, which is assumed to follow a
 half-Normal distribution:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>H</mi><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>z</mi><mn>2</mn><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\tau_{P2} \sim HN(z^2_2)</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>∼</mo><mi>H</mi><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msubsup><mi>z</mi><mn>2</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\tau_{P2} \sim HN(z^2_2)</annotation></semantics></math>.</p>
 <p>Similar to the above, a phase III study level model for treatment
 effect on endpoint
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><annotation encoding="application/x-tex">\theta_{P3}</annotation></semantics></math>
 has the following distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>θ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>θ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \theta_{P3} \sim Normal (\mu_P, \tau_{P3}^2)\label{eq:p3}
 \end{align}</annotation></semantics></math></p>
 <p>The population level parameter
@@ -129,7 +129,7 @@ has the following distribution:</p>
 is shared across the phases of the clinical development.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><annotation encoding="application/x-tex">\tau_{P3}</annotation></semantics></math>
 is assumed to follow a half-Normal distribution:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>H</mi><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>z</mi><mn>3</mn><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\tau_{P3} \sim HN(z^2_3)</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>H</mi><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msubsup><mi>z</mi><mn>3</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\tau_{P3} \sim HN(z^2_3)</annotation></semantics></math>.
 The choice of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>τ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\tau_{P2},\ \tau_{P3}</annotation></semantics></math>
 will follow Supplementary Materials E in <span class="citation">Hampson
@@ -140,38 +140,43 @@ et al. (2022)</span>.</p>
 </h2>
 <p>The population level treatment effect,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mu_P</annotation></semantics></math>,
-is assumed to come from a mixture prior:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>μ</mi><mi>P</mi></msub><mo>∼</mo><mi>ω</mi><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>δ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>ω</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
-\mu_{P} \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2) ,
+is assumed to come from a mixture prior with a random mixing weight:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>μ</mi><mi>P</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>∼</mo><mi>ω</mi><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>δ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>ω</mi><mo stretchy="false" form="postfix">)</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>ω</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>∼</mo><mtext mathvariant="normal">Beta</mtext><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>β</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+\mu_{P} &amp; \sim \omega Normal (\delta_{P}, \sigma_{P1}^2) + (1-\omega) Normal(0, \sigma_{P2}^2),\\
+\omega &amp;\sim \text{Beta}(\alpha, \beta),
 \end{align}</annotation></semantics></math></p>
 <p>with the following components:</p>
 <ul>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
-is a probability that
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ω</mi><annotation encoding="application/x-tex">\omega</annotation></semantics></math>
+is the probability that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\mu_P</annotation></semantics></math>
-comes from the enthusiastic prior component. The value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
-is determined by the industry benchmark.</p></li>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>δ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Normal(\delta_P, \sigma^2_{P1})</annotation></semantics></math>
+comes from the enthusiastic prior component.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ω</mi><annotation encoding="application/x-tex">\omega</annotation></semantics></math>
+is treated as a random variable to incorporate uncertainty and
+variability in the benchmark probability of success (PoS). The Beta
+prior allows integration of historical information (e.g., industry Phase
+III success rates or machine-learning-based predictions) while
+permitting data-driven updating.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>δ</mi><mi>P</mi></msub><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Normal(\delta_P, \sigma^2_{P1})</annotation></semantics></math>
 is the enthusiastic component, i.e., a distribution which is centered at
 the target treatment effect
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>δ</mi><mi>P</mi></msub><annotation encoding="application/x-tex">\delta_P</annotation></semantics></math>
 (i.e., alternative hypothesis).
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow><mn>2</mn></msubsup><annotation encoding="application/x-tex">\sigma^2_{P1}</annotation></semantics></math>
 is set as a solution to:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>≥</mo><mn>0</mn><mo stretchy="false" form="prefix">|</mo><mi>ω</mi><mo>=</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>γ</mi></mrow><annotation encoding="application/x-tex">P(\mu_P \ge 0 | \omega = 1)=\gamma</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>≥</mo><mn>0</mn><mo stretchy="false" form="prefix">|</mo><mi>ω</mi><mo>=</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>γ</mi></mrow><annotation encoding="application/x-tex">P(\mu_P \ge 0 | \omega = 1)=\gamma</annotation></semantics></math>,
 which is consistent with the interpretation of the enthusiastic
 (“alternative”) component,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⇔</mo><msub><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow></msub><mo>=</mo><mfrac><msub><mi>δ</mi><mi>P</mi></msub><mrow><msup><mi>Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>γ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Leftrightarrow \sigma_{P1} = \frac{\delta_P}{\Phi^{-1}(\gamma)}</annotation></semantics></math>.</p></li>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Normal(0, \sigma^2_{P2})</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⇔</mo><msub><mi>σ</mi><mrow><mi>P</mi><mn>1</mn></mrow></msub><mo>=</mo><mfrac><msub><mi>δ</mi><mi>P</mi></msub><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>γ</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Leftrightarrow \sigma_{P1} = \frac{\delta_P}{\Phi^{-1}(\gamma)}</annotation></semantics></math>.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Normal(0, \sigma^2_{P2})</annotation></semantics></math>
 is the skeptical component, i.e., a distribution which is centered at
 the null hypothesis.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow><mn>2</mn></msubsup><annotation encoding="application/x-tex">\sigma^2_{P2}</annotation></semantics></math>
 is set as a solution to:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>≤</mo><msub><mi>δ</mi><mi>P</mi></msub><mo stretchy="false" form="prefix">|</mo><mi>ω</mi><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>γ</mi></mrow><annotation encoding="application/x-tex">P(\mu_P \le \delta_P | \omega = 0)=\gamma</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>μ</mi><mi>P</mi></msub><mo>≤</mo><msub><mi>δ</mi><mi>P</mi></msub><mo stretchy="false" form="prefix">|</mo><mi>ω</mi><mo>=</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>γ</mi></mrow><annotation encoding="application/x-tex">P(\mu_P \le \delta_P | \omega = 0)=\gamma</annotation></semantics></math>,
 which is consistent with the interpretation of the skeptical (“null”)
 component,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⇔</mo><msub><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>=</mo><mfrac><msub><mi>δ</mi><mi>P</mi></msub><mrow><msup><mi>Φ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>γ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Leftrightarrow \sigma_{P2} = \frac{\delta_P}{\Phi^{-1}(\gamma)}</annotation></semantics></math>.</p></li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>⇔</mo><msub><mi>σ</mi><mrow><mi>P</mi><mn>2</mn></mrow></msub><mo>=</mo><mfrac><msub><mi>δ</mi><mi>P</mi></msub><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>γ</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Leftrightarrow \sigma_{P2} = \frac{\delta_P}{\Phi^{-1}(\gamma)}</annotation></semantics></math>.</p></li>
 </ul>
 <p>When
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
@@ -211,7 +216,7 @@ at the
 analysis,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow></msub><mo>,</mo><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">\hat{\theta}_{P3j}, j = 1, ..., J</annotation></semantics></math>
 is as follows:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>𝛉</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><msub><mn>𝟏</mn><mi>J</mi></msub><mo>,</mo><msub><mi>𝚺</mi><mrow><mi>J</mi><mo>×</mo><mi>J</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>𝛉</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>P</mi><mn>3</mn></mrow></msub><msub><mn>𝟏</mn><mi>J</mi></msub><mo>,</mo><msub><mi>𝚺</mi><mrow><mi>J</mi><mo>×</mo><mi>J</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \hat{\boldsymbol{\theta}}_{P3} \sim Normal ({\theta}_{P3}\mathbf{1}_{J}, \mathbf{\Sigma}_{J \times J})\label{eq:thetahat_samp},
 \end{align}</annotation></semantics></math></p>
 <p>where
@@ -230,12 +235,12 @@ is the covariance matrix that encodes the Fisher’s information for
 being the target number of events at the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th
 analysis and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi>u</mi><mi>n</mi><mi>i</mi><mi>t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma_{unit}^2 = \frac{1}{p_0(1-p_0)}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi>u</mi><mi>n</mi><mi>i</mi><mi>t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma_{unit}^2 = \frac{1}{p_0(1-p_0)}</annotation></semantics></math>
 where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>
 is the planned proportion of patients in the control group.</p>
 <p>The predicted treatment effect
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mover><mi>𝛉</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">\hat{\boldsymbol{\theta}}_{P3}^{(l)}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mover><mi>𝛉</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">\hat{\boldsymbol{\theta}}_{P3}^{(l)}</annotation></semantics></math>
 is generated
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
 times
@@ -246,13 +251,13 @@ analysis is determined by a Frequentest efficacy boundary,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">z_{P3j}</annotation></semantics></math>.
 Thus, the probability of stopping a phase III trial for efficacy at the
 first IA is estimated as:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mn>31</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>L</mi></mfrac><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi>L</mi></munderover><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>31</mn></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>&lt;</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>31</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mn>31</mn></msub><mo>=</mo><mfrac><mn>1</mn><mi>L</mi></mfrac><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi>L</mi></munderover><mi>I</mi><mo stretchy="false" form="prefix">(</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>31</mn></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>&lt;</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>31</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
 \hat{PoS}_{31} = \frac{1}{L} \sum_{l=1}^L I(\hat{\theta}_{P31}^{(l)} &lt; z_{P31}),
 </annotation></semantics></math> and the probability of stopping a phase
 III trial for efficacy at the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>j</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">j^{th}</annotation></semantics></math>
 analysis is estimated as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mrow><mn>3</mn><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mi>L</mi></mfrac><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi>L</mi></munderover><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>&lt;</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow></msub><mo>,</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn><mi>i</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>≥</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>3</mn><mi>i</mi></mrow></msub><mo>,</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>j</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mrow><mn>3</mn><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mi>L</mi></mfrac><munderover><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow><mi>L</mi></munderover><mi>I</mi><mo stretchy="false" form="prefix">(</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>&lt;</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>3</mn><mi>j</mi></mrow></msub><mo>,</mo><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>P</mi><mn>3</mn><mi>i</mi></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>≥</mo><msub><mi>z</mi><mrow><mi>P</mi><mn>3</mn><mi>i</mi></mrow></msub><mo>,</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>j</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \hat{PoS}_{3j} = \frac{1}{L} \sum_{l=1}^L I(\hat{\theta}_{P3j}^{(l)} &lt; z_{P3j}, \hat{\theta}_{P3i}^{(l)} \geq z_{P3i}, i = 1, \dots, j-1).
 </annotation></semantics></math> Finally, the overall PoS is:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mn>3</mn></msub><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></msubsup><msub><mover><mrow><mi>P</mi><mi>o</mi><mi>S</mi></mrow><mo accent="true">̂</mo></mover><mrow><mn>3</mn><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\hat{PoS}_{3} = \sum_{j=1}^J \hat{PoS}_{3j}</annotation></semantics></math>.</p>
@@ -269,7 +274,7 @@ represents a log odds ratio (OR) of the treatment effect on ORR, the
 observed treatment effect,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">\hat{\theta}_{ORR, 2}</annotation></semantics></math>,
 has the following distribution:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><msubsup><mi>ℐ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>θ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><msubsup><mi>ℐ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \hat{\theta}_{ORR, 2} \sim Normal(\theta_{ORR, 2}, \mathcal{I}_{ORR, 2}^{-1}),
 \end{align}</annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℐ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{I}_{ORR, 2}</annotation></semantics></math>
@@ -280,13 +285,13 @@ Further, let
 be the treatment effect for PFS in Phase II. Motivated by the results in
 <span class="citation">Blumenthal et al. (2015)</span>, we assume the
 following linear model between the PFS and ORR treatment effects:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>θ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><msub><mi>θ</mi><mrow><mi>P</mi><mi>F</mi><mi>S</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><mfrac><msubsup><mi>σ</mi><mrow><mi>W</mi><mi>L</mi><mi>S</mi></mrow><mn>2</mn></msubsup><msub><mi>N</mi><mrow><mi>p</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>s</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>θ</mi><mrow><mi>O</mi><mi>R</mi><mi>R</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><msub><mi>θ</mi><mrow><mi>P</mi><mi>F</mi><mi>S</mi><mo>,</mo><mn>2</mn></mrow></msub><mo>,</mo><mfrac><msubsup><mi>σ</mi><mrow><mi>W</mi><mi>L</mi><mi>S</mi></mrow><mn>2</mn></msubsup><msub><mi>N</mi><mrow><mi>p</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>s</mi></mrow></msub></mfrac><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
   \theta_{ORR,2} \sim N(\beta_0 + \beta_1 \theta_{PFS,2}, \frac{\sigma_{WLS}^2}{N_{patients}}), \label{eq:ph23_pfs_orr_rel}
 \end{align}</annotation></semantics></math> where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mrow><mi>p</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">N_{patients}</annotation></semantics></math>
 is the number of patients in a given trial and the regression parameters
 are assigned the following priors:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>β</mi><mn>0</mn></msub><mo>∼</mo><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mn>0</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>β</mi><mn>1</mn></msub><mo>∼</mo><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>β</mi><mn>0</mn></msub><mo>∼</mo><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>0</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>β</mi><mn>1</mn></msub><mo>∼</mo><mrow><mi>N</mi><mi>o</mi><mi>r</mi><mi>m</mi><mi>a</mi><mi>l</mi></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
 \beta_0 \sim {Normal}(m_0, \nu_0) \\
 \beta_1 \sim {Normal}(m_1, \nu_1). 
 \end{align*}</annotation></semantics></math> The values of
@@ -297,11 +302,11 @@ and
 are determined from historical data, which is provided in the
 meta-analysis in <span class="citation">Blumenthal et al. (2015)</span>.
 Specifically,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mn>0</mn></msub><mo>,</mo><msub><mi>m</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(m_0, m_1)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>0</mn></msub><mo>,</mo><msub><mi>m</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(m_0, m_1)</annotation></semantics></math>
 are point estimates for the intercept and slope from a weighted liner
 simple (WLS) linear regression model of log(HR PFS) on log(OR ORR),
 while
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>ν</mi><mn>0</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\nu_0, \nu_1)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>ν</mi><mn>0</mn></msub><mo>,</mo><msub><mi>ν</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\nu_0, \nu_1)</annotation></semantics></math>
 are their respective SEs,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>σ</mi><mrow><mi>W</mi><mi>L</mi><mi>S</mi></mrow><mn>2</mn></msubsup><annotation encoding="application/x-tex">\sigma_{WLS}^2</annotation></semantics></math>
 is estimated based on WLS regression residual variance.</p>
@@ -313,22 +318,198 @@ a distribution for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mrow><mi>P</mi><mi>F</mi><mi>S</mi><mo>,</mo><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">\theta_{PFS, 2}</annotation></semantics></math>
 can be obtained and, therefore, a predicated efficacy PoS can be
 estimated as using models that are outlined above.</p>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div class="section level3">
+<h3 id="sec:indication_specific">Indication-specific surrogate-primary endpoint relationships (e.g.,
+ORR
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math>
+PFS)<a class="anchor" aria-label="anchor" href="#sec:indication_specific"></a>
+</h3>
+<p>When early endpoint objective response rate (ORR) is used to predict
+phase III progression-free survival (PFS), the strength and direction of
+the association may vary substantially across cancer types. To account
+for this heterogeneity, we group cancer indications into five
+categories, each associated with a distinct set of ORR–PFS regression
+parameters derived from prior Bayesian hierarchical modeling.</p>
+<p>Trial indexed by:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">j = 1, \dots, J</annotation></semantics></math>.
+Indication indexed by:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><msub><mi>z</mi><mi>j</mi></msub><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>K</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">k = z_j \in \{1, \dots, K\}</annotation></semantics></math>.</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>θ</mi><mi>j</mi><mi>P</mi></msubsup><annotation encoding="application/x-tex">\theta^P_j</annotation></semantics></math>:
+treatment effect on endpoint
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+at trial
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>σ</mi><mi>j</mi><mi>P</mi></msubsup><annotation encoding="application/x-tex">\sigma^P_j</annotation></semantics></math>:
+standard error of treatment effect on endpoint
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+at trial
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.</p>
+<div class="section level4">
+<h4 id="level-1-observed-trial-level-model">Level 1: Observed trial-level model<a class="anchor" aria-label="anchor" href="#level-1-observed-trial-level-model"></a>
+</h4>
+<p>Each trial reports an observed log-odds ratio for ORR,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mi>j</mi><mtext mathvariant="normal">ORR</mtext></msubsup><annotation encoding="application/x-tex">\hat\theta^{\text{ORR}}_j</annotation></semantics></math>,
+and an observed log-hazard ratio for PFS,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mi>j</mi><mtext mathvariant="normal">PFS</mtext></msubsup><annotation encoding="application/x-tex">\hat\theta^{\text{PFS}}_j</annotation></semantics></math>,
+modeled as:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mi>j</mi><mtext mathvariant="normal">ORR</mtext></msubsup><mo>∼</mo><mi>𝒩</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>θ</mi><mi>j</mi><mtext mathvariant="normal">ORR</mtext></msubsup><mo>,</mo><mspace width="0.222em"></mspace><msup><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>σ</mi><mi>j</mi><mtext mathvariant="normal">ORR</mtext></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\hat\theta^{\text{ORR}}_j \sim \mathcal{N}\!\left(\theta^{\text{ORR}}_j,\ \left(\sigma^{\text{ORR}}_j\right)^2\right)
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mi>j</mi><mtext mathvariant="normal">PFS</mtext></msubsup><mo>∼</mo><mi>𝒩</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>θ</mi><mi>j</mi><mtext mathvariant="normal">PFS</mtext></msubsup><mo>,</mo><mspace width="0.222em"></mspace><msup><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>σ</mi><mi>j</mi><mtext mathvariant="normal">PFS</mtext></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\hat\theta^{\text{PFS}}_j \sim \mathcal{N}\!\left(\theta^{\text{PFS}}_j,\ \left(\sigma^{\text{PFS}}_j\right)^2\right)
+</annotation></semantics></math></p>
+<p>Conditional on the (latent) true PFS effect, the true ORR effect
+follows an indication-specific regression:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>θ</mi><mi>j</mi><mtext mathvariant="normal">ORR</mtext></msubsup><mspace width="0.278em"></mspace><mo>∼</mo><mspace width="0.278em"></mspace><mi>𝒩</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>α</mi><msub><mi>z</mi><mi>j</mi></msub></msub><mo>+</mo><msub><mi>β</mi><msub><mi>z</mi><mi>j</mi></msub></msub><mspace width="0.167em"></mspace><msubsup><mi>θ</mi><mi>j</mi><mtext mathvariant="normal">PFS</mtext></msubsup><mo>,</mo><mspace width="0.278em"></mspace><mfrac><msubsup><mi>σ</mi><mtext mathvariant="normal">WLS</mtext><mn>2</mn></msubsup><msub><mi>N</mi><mrow><mtext mathvariant="normal">patients</mtext><mo>,</mo><mi>j</mi></mrow></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\theta^{\text{ORR}}_j \;\sim\; \mathcal{N}\!\left(\alpha_{z_j} + \beta_{z_j}\,\theta^{\text{PFS}}_j,\;
+\frac{\sigma_{\text{WLS}}^{2}}{N_{\text{patients},j}}\right)
+</annotation></semantics></math></p>
+</div>
+<div class="section level4">
+<h4 id="level-2-indication-specific-regression-parameters">Level 2: Indication-specific regression parameters<a class="anchor" aria-label="anchor" href="#level-2-indication-specific-regression-parameters"></a>
+</h4>
+<p>Information is shared across indications via hierarchical modeling.
+Each pair
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>α</mi><mi>k</mi></msub><mo>,</mo><msub><mi>β</mi><mi>k</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\alpha_k, \beta_k)</annotation></semantics></math>
+is learned adaptively across indications:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mi>k</mi></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>a</mi><mn>0</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msubsup><mi>s</mi><mn>0</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>β</mi><mi>k</mi></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>b</mi><mn>0</mn></msub><mo>,</mo><mspace width="0.222em"></mspace><msubsup><mi>s</mi><mn>1</mn><mn>2</mn></msubsup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">
+\alpha_k \sim \mathcal{N}(a_0,\ s_0^2), \qquad
+\beta_k \sim \mathcal{N}(b_0,\ s_1^2), \qquad
+k = 1, \dots, 5
+</annotation></semantics></math></p>
+</div>
+<div class="section level4">
+<h4 id="level-3-population-level-hyperpriors">Level 3: Population-level hyperpriors<a class="anchor" aria-label="anchor" href="#level-3-population-level-hyperpriors"></a>
+</h4>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><msup><mn>5</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>b</mi><mn>0</mn></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>,</mo><mspace width="0.222em"></mspace><msup><mn>5</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>s</mi><mn>0</mn></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><msup><mn>5</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>s</mi><mn>1</mn></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><msup><mn>5</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>σ</mi><mtext mathvariant="normal">WLS</mtext></msub><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><msup><mn>5</mn><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+a_0 \sim \mathcal{N}(0,\ 5^2), \quad
+b_0 \sim \mathcal{N}(2,\ 5^2), \quad
+s_0 \sim \mathcal{N}(0,\ 5^2), \quad
+s_1 \sim \mathcal{N}(0,\ 5^2), \quad
+\sigma_{\text{WLS}} \sim \mathcal{N}(0,\ 5^2)
+</annotation></semantics></math></p>
+</div>
+<div class="section level4">
+<h4 id="indication-groups">Indication Groups<a class="anchor" aria-label="anchor" href="#indication-groups"></a>
+</h4>
+<p><strong>Group 1: Hematologic malignancies</strong></p>
+<p>Includes classical Hodgkin lymphoma (cHL), diffuse large B-cell
+lymphoma (DLBCL), follicular lymphoma (FL), multiple myeloma (MM),
+non-Hodgkin lymphoma (NHL), and peripheral T-cell lymphoma (PTCL).</p>
+<p><strong>Group 2: Gynecologic cancers</strong></p>
+<p>Includes cervical, endometrial, and ovarian cancers.</p>
+<p><strong>Group 3: Thoracic malignancies</strong></p>
+<p>Includes non-small cell lung cancer (NSCLC), small cell lung cancer
+(SCLC), and mesothelioma.</p>
+<p><strong>Group 4: Urologic and gastrointestinal solid
+tumors</strong></p>
+<p>Includes bladder cancer, gastric cancer, and renal cell carcinoma
+(RCC).</p>
+<p><strong>Group 5: Breast cancer</strong></p>
+<p>Includes breast cancer.</p>
+<blockquote>
+<p>If no indication is specified, the average ORR–PFS relationship
+across all indication groups will be used.</p>
+</blockquote>
+</div>
+</div>
+<div class="section level3">
+<h3 id="sec:orr_data">Prior ORR data<a class="anchor" aria-label="anchor" href="#sec:orr_data"></a>
+</h3>
+<p>The method for computing the observed log-odds ratio
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mtext mathvariant="normal">ORR</mtext></msup><annotation encoding="application/x-tex">\hat\theta^{\text{ORR}}</annotation></semantics></math>
+and its standard error differs depending on whether the earlier study
+was a two-arm or single-arm trial.</p>
+<div class="section level4">
+<h4 id="two-arm-setting">Two-arm setting<a class="anchor" aria-label="anchor" href="#two-arm-setting"></a>
+</h4>
+<p>In the two-arm setting,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mtext mathvariant="normal">ORR</mtext></msup><annotation encoding="application/x-tex">\hat\theta^{\text{ORR}}</annotation></semantics></math>
+and its standard error are estimated directly from the observed response
+counts in each arm using frequentist estimation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mtext mathvariant="normal">ORR</mtext></msup><mo>=</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub><mrow><msub><mi>n</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>−</mo><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mi>x</mi><mtext mathvariant="normal">trt</mtext></msub><mrow><msub><mi>n</mi><mtext mathvariant="normal">trt</mtext></msub><mo>−</mo><msub><mi>x</mi><mtext mathvariant="normal">trt</mtext></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\hat\theta^{\text{ORR}} = \log\!\left(\frac{x_{\text{SOC}}}{n_{\text{SOC}} - x_{\text{SOC}}}\right) - \log\!\left(\frac{x_{\text{trt}}}{n_{\text{trt}} - x_{\text{trt}}}\right)
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>E</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msup><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mtext mathvariant="normal">ORR</mtext></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><mrow><mfrac><mn>1</mn><msub><mi>x</mi><mtext mathvariant="normal">trt</mtext></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mtext mathvariant="normal">trt</mtext></msub><mo>−</mo><msub><mi>x</mi><mtext mathvariant="normal">trt</mtext></msub></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>−</mo><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub></mrow></mfrac></mrow></msqrt></mrow><annotation encoding="application/x-tex">
+SE\!\left(\hat\theta^{\text{ORR}}\right) = \sqrt{\frac{1}{x_{\text{trt}}} + \frac{1}{n_{\text{trt}} - x_{\text{trt}}} + \frac{1}{x_{\text{SOC}}} + \frac{1}{n_{\text{SOC}} - x_{\text{SOC}}}}
+</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">x_{\text{SOC}}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mtext mathvariant="normal">trt</mtext></msub><annotation encoding="application/x-tex">x_{\text{trt}}</annotation></semantics></math>
+are the number of responders and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">n_{\text{SOC}}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mtext mathvariant="normal">trt</mtext></msub><annotation encoding="application/x-tex">n_{\text{trt}}</annotation></semantics></math>
+are the total number of patients in the SOC and treatment groups,
+respectively.</p>
+</div>
+<div class="section level4">
+<h4 id="single-arm-setting">Single-arm setting<a class="anchor" aria-label="anchor" href="#single-arm-setting"></a>
+</h4>
+<p>When only single-arm data are available (i.e., no concurrent control
+arm), the observed ORR treatment effect cannot be computed directly from
+two-arm counts. Instead, following <span class="citation">Weber et al.
+(2021)</span>, uncertainty in the control ORR is incorporated by placing
+a distribution over the Standard of Care (SOC) response rate,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">p_{\text{SOC}}</annotation></semantics></math>,
+using user-specified lower and upper bounds.</p>
+<p>Let <code>low_soc_rr</code> and <code>upp_soc_rr</code> denote the
+lower and upper bounds for the control ORR. The corresponding
+logit-scale bounds are:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚕𝚘𝚠</mtext><mo>=</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mtext mathvariant="monospace">𝚕𝚘𝚠_𝚜𝚘𝚌_𝚛𝚛</mtext><mrow><mn>1</mn><mo>−</mo><mtext mathvariant="monospace">𝚕𝚘𝚠_𝚜𝚘𝚌_𝚛𝚛</mtext></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚞𝚙𝚙</mtext><mo>=</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mtext mathvariant="monospace">𝚞𝚙𝚙_𝚜𝚘𝚌_𝚛𝚛</mtext><mrow><mn>1</mn><mo>−</mo><mtext mathvariant="monospace">𝚞𝚙𝚙_𝚜𝚘𝚌_𝚛𝚛</mtext></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\texttt{logit_low} = \log\!\left(\frac{\texttt{low_soc_rr}}{1 - \texttt{low_soc_rr}}\right), \qquad
+\texttt{logit_upp} = \log\!\left(\frac{\texttt{upp_soc_rr}}{1 - \texttt{upp_soc_rr}}\right)
+</annotation></semantics></math></p>
+<p>Rather than fixing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">p_{\text{SOC}}</annotation></semantics></math>
+to a point estimate, a normal distribution is placed on the logit
+scale:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">logit</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>p</mi><mtext mathvariant="normal">SOC</mtext></msub><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>𝒩</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>,</mo><mspace width="0.167em"></mspace><msubsup><mi>σ</mi><mtext mathvariant="normal">SOC</mtext><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.278em"></mspace><mo>⇒</mo><mspace width="0.278em"></mspace><msub><mi>p</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>=</mo><mfrac><msup><mi>e</mi><mi>x</mi></msup><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mi>x</mi></msup></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>x</mi><mo>∼</mo><mi>𝒩</mi><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>μ</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>,</mo><mspace width="0.167em"></mspace><msubsup><mi>σ</mi><mtext mathvariant="normal">SOC</mtext><mn>2</mn></msubsup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\text{logit}(p_{\text{SOC}}) \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+\;\Rightarrow\; p_{\text{SOC}} = \frac{e^x}{1 + e^x}, \quad x \sim \mathcal{N}\!\left(\mu_{\text{SOC}},\, \sigma_{\text{SOC}}^2\right)
+</annotation></semantics></math></p>
+<p>where the mean and standard deviation are derived from the specified
+bounds:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>=</mo><mfrac><mrow><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚕𝚘𝚠</mtext><mo>+</mo><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚞𝚙𝚙</mtext></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">
+\mu_{\text{SOC}} = \frac{\texttt{logit_low} + \texttt{logit_upp}}{2}
+</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mtext mathvariant="normal">SOC</mtext></msub><mo>=</mo><mfrac><mrow><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚞𝚙𝚙</mtext><mo>−</mo><mtext mathvariant="monospace">𝚕𝚘𝚐𝚒𝚝_𝚕𝚘𝚠</mtext></mrow><mrow><mn>2</mn><mo>⋅</mo><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><mn>1</mn><mo>−</mo><mtext mathvariant="monospace">𝚌𝚒_𝚛𝚛</mtext></mrow><mn>2</mn></mfrac></mstyle><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\sigma_{\text{SOC}} = \frac{\texttt{logit_upp} - \texttt{logit_low}}{2\cdot\Phi^{-1}\!\left(1 - \dfrac{1 - \texttt{ci_rr}}{2}\right)}
+</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">Φ</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>⋅</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Phi^{-1}(\cdot)</annotation></semantics></math>
+denotes the quantile function of the standard normal distribution.
+<code>ci_rr</code> is the user-specified confidence level for the SOC
+response bounds (default = 80%). Lower values may be used for more
+conservative assumptions or when the SOC data are uncertain. In the
+single-arm setting,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">x_{\text{SOC}}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">n_{\text{SOC}}</annotation></semantics></math>
+entering the expressions above are drawn from the distribution over
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mtext mathvariant="normal">SOC</mtext></msub><annotation encoding="application/x-tex">p_{\text{SOC}}</annotation></semantics></math>
+rather than observed directly.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-blumenthal2015overall" class="csl-entry">
-Blumenthal, Gideon M, Stella W Karuri, Hui Zhang, Lijun Zhang, Sean
-Khozin, Dickran Kazandjian, Shenghui Tang, Rajeshwari Sridhara, Patricia
-Keegan, and Richard Pazdur. 2015. <span>“Overall Response Rate,
-Progression-Free Survival, and Overall Survival with Targeted and
-Standard Therapies in Advanced Non–Small-Cell Lung Cancer: US Food and
-Drug Administration Trial-Level and Patient-Level Analyses.”</span>
-<em>Journal of Clinical Oncology</em> 33 (9): 1008.
+Blumenthal, Gideon M, Stella W Karuri, Hui Zhang, et al. 2015.
+<span>“Overall Response Rate, Progression-Free Survival, and Overall
+Survival with Targeted and Standard Therapies in Advanced Non–Small-Cell
+Lung Cancer: US Food and Drug Administration Trial-Level and
+Patient-Level Analyses.”</span> <em>Journal of Clinical Oncology</em> 33
+(9): 1008.
 </div>
 <div id="ref-hampson2022improving" class="csl-entry">
-Hampson, Lisa V, Björn Bornkamp, Björn Holzhauer, Joseph Kahn, Markus R
-Lange, Wen-Lin Luo, Giovanni Della Cioppa, Kelvin Stott, and Steffen
-Ballerstedt. 2022. <span>“Improving the Assessment of the Probability of
-Success in Late Stage Drug Development.”</span> <em>Pharmaceutical
-Statistics</em> 21 (2): 439–59.
+Hampson, Lisa V, Björn Bornkamp, Björn Holzhauer, et al. 2022.
+<span>“Improving the Assessment of the Probability of Success in Late
+Stage Drug Development.”</span> <em>Pharmaceutical Statistics</em> 21
+(2): 439–59.
+</div>
+<div id="ref-weber2021applying" class="csl-entry">
+Weber, Sebastian, Yue Li, John W Seaman III, Tomoyuki Kakizume, and
+Heinz Schmidli. 2021. <span>“Applying Meta-Analytic-Predictive Priors
+with the <span>R</span> <span>B</span>ayesian Evidence Synthesis
+Tools.”</span> <em>Journal of Statistical Software</em> 100 (19): 1–39.
+<a href="https://doi.org/10.18637/jss.v100.i19" class="external-link">https://doi.org/10.18637/jss.v100.i19</a>.
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -339,7 +520,7 @@ Statistics</em> 21 (2): 439–59.
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Yulia Sidi, Xiang Peng, Alex Ziyu Jiang. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0. <br>Copyright © 2026 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
+  <p>Developed by Yulia Sidi, Xiang Peng, Shun Rao, Alex Ziyu Jiang. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0. <br>Copyright © 2026 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
 </div>
 
 <div class="pkgdown-footer-right">
