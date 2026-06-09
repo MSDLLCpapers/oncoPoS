@@ -1,5 +1,9 @@
 # oncoPoS 
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/MSDLLCpapers/oncoPoS/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MSDLLCpapers/oncoPoS/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## Overview
 
 `oncoPoS` performs Probability of Success (PoS) calculations for a phase 3
